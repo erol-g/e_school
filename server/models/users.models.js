@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 require("dotenv/config");
 const { model, Schema } = mongoose;
 
-const databaseUri = `mongodb+srv://talrise:${process.env.DB_PASSWORD}@cluster0.cjmmdbt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+const databaseUri = `mongodb+srv://talrise:${process.env.DB_PASSWORD}@cluster0.cjmmdbt.mongodb.net/School?retryWrites=true&w=majority&appName=Cluster0`;
 
 mongoose
   .connect(databaseUri)
@@ -39,6 +39,18 @@ const studentsSchema = new Schema({
   address: {
     type: String,
   },
+  grades: [
+    {
+      name: {
+        type: String,
+        required: true,
+      },
+      result: {
+        type: Number,
+        required: true,
+      }
+    }
+  ]
 });
 
 const teachersSchema = new Schema({
