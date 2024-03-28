@@ -8,6 +8,10 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/index');
 var getDirector = require('./routes/users')
+var addDirector = require('./routes/users');
+var sendTeacher = require('./routes/users');
+var sendStudent = require('./routes/users');
+
 const cors = require ('cors')
 
 var app = express();
@@ -32,6 +36,10 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/login', loginRouter);
 app.use('/', getDirector)
+app.use('/', addDirector)
+app.use('/', sendTeacher)
+app.use('/', sendStudent);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
