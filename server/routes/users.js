@@ -1,5 +1,5 @@
 var express = require('express');
-const { getDirector, addDirector, sendTeacher, sendStudent } = require('../controllers/user.controller');
+const { getDirector, addDirector, sendTeacher, sendStudent, getStudentsByClass } = require('../controllers/user.controller');
 var router = express.Router();
 
 /* GET users listing. */
@@ -10,5 +10,6 @@ router.get("/getDirector", getDirector)
 router.post("/addDirector", addDirector)
 router.post("/register-teacher", sendTeacher)
 router.post("/register-student", sendStudent)
+router.get("/students/:className", getStudentsByClass)
 
 module.exports = router;

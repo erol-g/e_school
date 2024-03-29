@@ -32,4 +32,20 @@ const sendStudent =
     res.json(req.body);
   });
 
-module.exports = { getDirector, addDirector, sendTeacher, sendStudent };
+const getStudentsByClass = async (req, res) => {
+  try {
+    const className = req.params.className;
+    const students = await User.find({ className });
+    res.json(students);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = {
+  getDirector,
+  addDirector,
+  sendTeacher,
+  sendStudent,
+  getStudentsByClass,
+};

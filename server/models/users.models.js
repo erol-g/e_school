@@ -39,6 +39,7 @@ const studentsSchema = new Schema({
   address: {
     type: String,
   },
+  className: String,
   grades: [
     {
       name: {

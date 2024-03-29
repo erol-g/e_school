@@ -14,8 +14,13 @@ const lessonSchema = new Schema({
     type: String,
     required: true,
   },
-  teacher: {
-    type: String,
+  className: {
+    type: Schema.Types.ObjectId,
+    ref: "ClassName", // Reference to class
+    required: true,
+  },
+  date: {
+    type: Date,
     required: true,
   },
   description: {
@@ -23,20 +28,8 @@ const lessonSchema = new Schema({
   },
 });
 
-const classNameSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  lessons: {
-    type: Schema.Types.ObjectId,
-    ref: 'Lesson',
-  },
-  learners: {
-    type: Number,
-  },
-});
+
 
 const Lesson = model("lessons", lessonSchema);
-const ClassName = model("lessons", classNameSchema);
-module.exports = { Lesson, Class };
+
+module.exports = { Lesson };
