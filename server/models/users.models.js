@@ -1,13 +1,8 @@
 const mongoose = require("mongoose");
-require("dotenv/config");
 const { model, Schema } = mongoose;
+const connectDB = require("../db.connection");
 
-const databaseUri = `mongodb+srv://talrise:${process.env.DB_PASSWORD}@cluster0.cjmmdbt.mongodb.net/School?retryWrites=true&w=majority&appName=Cluster0`;
-
-mongoose
-  .connect(databaseUri)
-  .then((res) => console.log("database connected"))
-  .catch((err) => console.log(err));
+connectDB();
 
 const directorSchema = new Schema({
   name: {
@@ -49,9 +44,9 @@ const studentsSchema = new Schema({
       result: {
         type: Number,
         required: true,
-      }
-    }
-  ]
+      },
+    },
+  ],
 });
 
 const teachersSchema = new Schema({
@@ -69,7 +64,20 @@ const teachersSchema = new Schema({
     type: String,
   },
 });
+const lessonsSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  teacherName: {
+    type: String,
+    required: true,
+  },
+});
+
 const Director = model("directors", directorSchema);
 const Teachers = model("teachers", teachersSchema);
 const Students = model("students", studentsSchema);
-module.exports = { Director, Teachers, Students };
+const Lessons = model("lessons", lessonsSchema);
+
+module.exports = { Director, Teachers, Students, Lessons };
