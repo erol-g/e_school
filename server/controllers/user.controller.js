@@ -24,7 +24,7 @@ const sendTeacher =
     res.json(req.body);
   });
 
-  const sendStudent =
+const sendStudent =
   ("/register-student",
   async (req, res) => {
     await Students.create(req.body);
