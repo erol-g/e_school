@@ -1,4 +1,5 @@
 const { Director, Teachers, Students } = require("../models/users.models.js");
+const {passControl} = require("../middlewares.js");
 
 const getDirector =
   ("/getDirector",
@@ -31,5 +32,19 @@ const sendStudent =
 
     res.json(req.body);
   });
-
-module.exports = { getDirector, addDirector, sendTeacher, sendStudent };
+const passwordControl =
+  ("/login",
+  [passControl],
+  (req, res) => {
+    res.status(200).json({
+      status: true,
+      message: "success",
+    });
+  });
+module.exports = {
+  getDirector,
+  addDirector,
+  sendTeacher,
+  sendStudent,
+  passwordControl,
+};

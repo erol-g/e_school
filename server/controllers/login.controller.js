@@ -1,7 +1,6 @@
+// const { passControl } = require('../middlewares.js')
+
 const  login = ("/login",async(req,res)=>{
-
-    console.log(req.body);
-
 
     res.json(req.body)
 
