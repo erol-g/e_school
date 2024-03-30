@@ -11,6 +11,7 @@ var getDirector = require("./routes/users");
 var addDirector = require("./routes/users");
 var sendTeacher = require("./routes/users");
 var sendStudent = require("./routes/users");
+var sendClasses = require("./routes/users");
 
 var createLesson = require("./routes/users");
 
@@ -43,6 +44,7 @@ app.use("/", sendStudent);
 
 //school route //lesson
 app.use("/", createLesson);
+app.use("/", sendClasses);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

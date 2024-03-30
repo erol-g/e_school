@@ -5,7 +5,10 @@ const {
   sendTeacher,
   sendStudent,
 } = require("../controllers/user.controller");
-const { createLesson } = require("../controllers/school.controller");
+const {
+  createLesson,
+  sendClasses,
+} = require("../controllers/school.controller");
 var router = express.Router();
 
 /* GET users listing. */
@@ -17,5 +20,6 @@ router.post("/addDirector", addDirector);
 router.post("/register-teacher", sendTeacher);
 router.post("/register-student", sendStudent);
 router.post("/create-lesson", createLesson);
+router.post("/register-class", sendClasses);
 
 module.exports = router;
