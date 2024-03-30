@@ -8,8 +8,10 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var loginRouter = require("./routes/index");
 var getDirector = require("./routes/users");
+var getSchoolInfo = require("./routes/users");
 var addDirector = require("./routes/users");
 var sendTeacher = require("./routes/users");
+var deleteTeacher = require("./routes/users");
 var sendStudent = require("./routes/users");
 
 var createLesson = require("./routes/users");
@@ -37,8 +39,10 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/login", loginRouter);
 app.use("/", getDirector);
+app.use("/", getSchoolInfo);
 app.use("/", addDirector);
 app.use("/", sendTeacher);
+app.use("/", deleteTeacher);
 app.use("/", sendStudent);
 
 //school route //lesson

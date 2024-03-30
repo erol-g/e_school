@@ -20,6 +20,22 @@ const directorSchema = new Schema({
   },
 });
 
+const schoolInfoSchema = new Schema({
+	name: {
+		type: String,
+		required: true,
+	},
+	email: {
+		type: String,
+	},
+	tel: {
+		type: Number,
+	},
+	address: {
+		type: String,
+	},
+});
+
 const studentsSchema = new Schema({
   name: {
     type: String,
@@ -78,5 +94,6 @@ const Director = model("directors", directorSchema);
 const Teachers = model("teachers", teachersSchema);
 const Students = model("students", studentsSchema);
 const Lessons = model("lessons", lessonsSchema);
+const SchoolInfo = model("schoolInfo", schoolInfoSchema);
 
-module.exports = { Director, Teachers, Students, Lessons };
+module.exports = { Director, Teachers, Students, Lessons, SchoolInfo };
