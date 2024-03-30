@@ -34,6 +34,7 @@ const studentsSchema = new Schema({
   address: {
     type: String,
   },
+
   grades: [
     {
       name: {
@@ -74,9 +75,18 @@ const lessonsSchema = new Schema({
   },
 });
 
+const messageSchema = new Schema({
+  sender: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  recipient: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  content: { type: String, required: true },
+  senderName: { type: String },
+  createdAt: { type: Date, default: Date.now },
+});
+
 const Director = model("directors", directorSchema);
 const Teachers = model("teachers", teachersSchema);
 const Students = model("students", studentsSchema);
 const Lessons = model("lessons", lessonsSchema);
+const Message = model("Message", messageSchema);
 
-module.exports = { Director, Teachers, Students, Lessons };
+module.exports = { Director, Teachers, Students, Lessons, Message };
