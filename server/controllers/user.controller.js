@@ -32,4 +32,22 @@ const sendStudent =
     res.json(req.body);
   });
 
-module.exports = { getDirector, addDirector, sendTeacher, sendStudent };
+const updatePassword = async (req, res) => {
+  let Model;
+  if (req.path.includes("director")) Model = Director;
+  if (req.path.includes("teacher")) Model = Teachers;
+  if (req.path.includes("student")) Model = Students;
+
+  await Model.updateOne({ _id: req.params?.userId }, req.body);
+  const updatedData = await Model.findOne({ _id: req.params?.userId });
+
+  res.json(updatedData);
+};
+
+module.exports = {
+  getDirector,
+  addDirector,
+  sendTeacher,
+  sendStudent,
+  updatePassword,
+};
