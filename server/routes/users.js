@@ -4,6 +4,8 @@ const {
   addDirector,
   sendTeacher,
   sendStudent,
+  getAllTeachers,
+  getPersonelInfoById
 } = require("../controllers/user.controller");
 const { createLesson } = require("../controllers/school.controller");
 var router = express.Router();
@@ -17,5 +19,7 @@ router.post("/addDirector", addDirector);
 router.post("/register-teacher", sendTeacher);
 router.post("/register-student", sendStudent);
 router.post("/create-lesson", createLesson);
+router.get("/getAllTeachers", getAllTeachers);
+router.get("/getPersonelInfo:/id", getPersonelInfoById);
 
 module.exports = router;
