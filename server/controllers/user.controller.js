@@ -1,5 +1,4 @@
 const { Director, Teachers, Students } = require("../models/users.models.js");
-const {passControl} = require("../middlewares.js");
 
 const getDirector =
   ("/getDirector",
@@ -34,7 +33,6 @@ const sendStudent =
   });
 const passwordControl =
   ("/login",
-  [passControl],
   (req, res) => {
     res.status(200).json({
       status: true,

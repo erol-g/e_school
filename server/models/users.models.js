@@ -18,6 +18,10 @@ const directorSchema = new Schema({
   address: {
     type: String,
   },
+  role:{
+  type: String,
+  required: true,
+  },
 });
 
 const studentsSchema = new Schema({
@@ -34,6 +38,10 @@ const studentsSchema = new Schema({
   address: {
     type: String,
   },
+  role:{
+    type: String,
+    required: true,
+    },
   grades: [
     {
       name: {
@@ -62,6 +70,10 @@ const teachersSchema = new Schema({
   address: {
     type: String,
   },
+  role:{
+    type: String,
+    required: true,
+    },
 });
 const lessonsSchema = new Schema({
   name: {
