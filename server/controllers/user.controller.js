@@ -32,13 +32,15 @@ const sendStudent =
     res.json(req.body);
   });
 const passwordControl =
-  ("/login",
   (req, res) => {
+    
     res.status(200).json({
       status: true,
       message: "success",
+      role:req.role
     });
-  });
+  };
+
 module.exports = {
   getDirector,
   addDirector,

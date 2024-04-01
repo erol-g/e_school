@@ -5,6 +5,7 @@ const {
   sendTeacher,
   sendStudent,
   passwordControl,
+  getAllUsers,
 } = require("../controllers/user.controller");
 const { createLesson } = require("../controllers/school.controller");
 const { passControl, roleControl } = require("../middlewares");

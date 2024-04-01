@@ -16,6 +16,7 @@ const passControl = async (req, res, next) => {
   }
 
   if (foundUser) {
+    req.role = foundUser.role; //burada istedigimiz veriyi bir sonraki asamada alabiliyoruz.
     next();
   } else {
     res.status(404).json({
