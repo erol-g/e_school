@@ -46,6 +46,9 @@ const studentsSchema = new Schema({
       },
     },
   ],
+}, {
+  collection: "students",
+  timestamps: true,
 });
 
 const teachersSchema = new Schema({
@@ -62,6 +65,9 @@ const teachersSchema = new Schema({
   address: {
     type: String,
   },
+}, {
+  collection: "teachers",
+  timestamps: true,
 });
 const lessonsSchema = new Schema({
   name: {
@@ -72,6 +78,9 @@ const lessonsSchema = new Schema({
     type: String,
     required: true,
   },
+}, {
+  collection: "lessons",
+  timestamps: true,
 });
 
 const Director = model("directors", directorSchema);

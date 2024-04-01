@@ -2,9 +2,29 @@ const { Lessons } = require("../models/users.models");
 
 const createLesson =
   ("/create-lesson",
-  async (req, res) => {
-    await Lessons.create(req.body);
-    res.json(req.body);
-  });
+    async (req, res) => {
+      await Lessons.create(req.body);
+      res.json(req.body);
+    });
 
-module.exports = { createLesson };
+    const deleteClass = 
+("/delete-class/:id",
+async (req, res) => {
+  try{
+    const {id} = req.params;
+    const result = await Lessons.findByIdAndDelete(id);
+
+    if(!result){
+      return res.status(404).json({message: 'Class not found'});
+    }
+    return res.status(200).send({message: 'Class deleted succesfully'})
+
+  }catch(error){
+    console.log(error.message);
+    res.status(500).send({message:error.message})
+  }
+}
+)
+
+
+module.exports = { createLesson, deleteClass };

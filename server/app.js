@@ -14,7 +14,12 @@ var sendStudent = require("./routes/users");
 
 var createLesson = require("./routes/users");
 
+var deleteStudent = require("./routes/users")
+var deleteClass = require("./routes/users")
+
+
 const cors = require("cors");
+
 
 var app = express();
 app.use(
@@ -43,6 +48,9 @@ app.use("/", sendStudent);
 
 //school route //lesson
 app.use("/", createLesson);
+
+app.use("/", deleteStudent);
+app.use("/", deleteClass);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

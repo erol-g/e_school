@@ -27,9 +27,30 @@ const sendTeacher =
 const sendStudent =
   ("/register-student",
   async (req, res) => {
-    await Students.create(req.body);
+    const data = await Students.create(req.body);
 
-    res.json(req.body);
+    res.json(data);
   });
 
-module.exports = { getDirector, addDirector, sendTeacher, sendStudent };
+const deleteStudent = 
+("/delete-student/:id",
+async (req, res) => {
+  try{
+    const {id} = req.params;
+    const result = await Students.findByIdAndDelete(id);
+
+    if(!result){
+      return res.status(404).json({message: 'Student not found'});
+    }
+    return res.status(200).send({message: 'Student deleted succesfully'})
+
+  }catch(error){
+    console.log(error.message);
+    res.status(500).send({message:error.message})
+  }
+}
+)
+
+
+
+module.exports = { getDirector, addDirector, sendTeacher, sendStudent, deleteStudent};
