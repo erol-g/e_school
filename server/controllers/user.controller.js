@@ -25,7 +25,6 @@ const getStudentGrade =
   ("/getGrade/:id",
   async (req, res) => {
     const result = await Students.findById(req.params.id);
-    // console.log(result);
     const grades = result.grades;
     res.json(grades);
   });
@@ -33,25 +32,25 @@ const getStudentGrade =
 const addDirector =
   ("/addDirector",
   async (req, res) => {
-    await Director.create(req.body);
+    const data = await Director.create(req.body);
 
-    res.json(req.body);
+    res.json(data);
   });
 
 const sendTeacher =
   ("/register-teacher",
   async (req, res) => {
-    await Teachers.create(req.body);
+    const data = await Teachers.create(req.body);
 
-    res.json(req.body);
+    res.json(data);
   });
 
 const sendStudent =
   ("/register-student",
   async (req, res) => {
-    await Students.create(req.body);
+    const data = await Students.create(req.body);
 
-    res.json(req.body);
+    res.json(data);
   });
 
 const updatePassword = async (req, res) => {
@@ -117,6 +116,8 @@ const passwordControl = (req, res) => {
     status: true,
     message: "success",
     role: req.role,
+    id: req.id,
+    name: req.name,
   });
 };
 
