@@ -1,16 +1,16 @@
 import { useState } from "react";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [  , setRole] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [, setRole] = useState("");
+  const [, setName] = useState("");
 
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
 
     fetch("http://localhost:3000/login", {
       method: "POST",
@@ -22,27 +22,32 @@ const Login = () => {
         password: password,
       }),
     })
-    .then((res) => res.json())
-    .then((res) => {
-      setRole(res.role);
-      switch (res.role) {
-        case "director":
-          navigate("/director-page");
-          break;
-        case "teacher":
-          navigate("/teacher-page");
-          break;
-        case "student":
-          navigate("/student-page");
-          break;
-        default:
-          alert(res.message);
-      }
-    });
+      .then((res) => res.json())
+      .then((res) => {
+        setRole(res.role);
+        setName(res.name);
+        localStorage.setItem(
+          "userInfo",
+          JSON.stringify({ name: res.name, role: res.role })
+        );
+        switch (res.role) {
+          case "director":
+            navigate("/director-page");
+            break;
+          case "teacher":
+            navigate("/teacher-page");
+            break;
+          case "student":
+            navigate("/student-page");
+            break;
+          default:
+            alert(res.message);
+        }
+      });
     setEmail("");
     setPassword("");
   };
-  
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
