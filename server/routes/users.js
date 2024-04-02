@@ -2,8 +2,12 @@ var express = require("express");
 const {
   getDirector,
   addDirector,
+  getStudent,
   sendTeacher,
   sendStudent,
+  getStudentGrade,
+  sendMessage,
+  getMessage,
   getAllStudents,
   passwordControl,
   getAllUsers,
@@ -26,6 +30,10 @@ router.post("/addDirector",[roleControl], addDirector);
 router.post("/register-teacher",[roleControl], sendTeacher);
 router.post("/register-student",[roleControl], sendStudent);
 router.post("/create-lesson", createLesson);
+router.post("/sendMessage", sendMessage);
+router.get("/getMessage/:id", getMessage);
+router.get("/getStudent", getStudent);
+router.get("/getGrade/:id", getStudentGrade);
 router.get("/all-students", getAllStudents);
 router.post("/register-class", sendClasses);
 router.post("/login",[passControl],passwordControl);

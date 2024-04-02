@@ -86,6 +86,14 @@ const lessonsSchema = new Schema({
   },
 });
 
+const messageSchema = new Schema({
+  sender: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  recipient: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  content: { type: String, required: true },
+  senderName: { type: String },
+  createdAt: { type: Date, default: Date.now },
+});
+
 const classesSchema = new Schema({
   className: {
     type: String,
@@ -101,6 +109,8 @@ const Director = model("directors", directorSchema);
 const Teachers = model("teachers", teachersSchema);
 const Students = model("students", studentsSchema);
 const Lessons = model("lessons", lessonsSchema);
+const Message = model("Message", messageSchema);
 const Classes = model("classes", classesSchema)
 
-module.exports = { Director, Teachers, Students, Lessons, Classes };
+module.exports = { Director, Teachers, Students, Lessons, Classes, Message };
+
