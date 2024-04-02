@@ -12,7 +12,7 @@ var addDirector = require("./routes/users");
 var sendTeacher = require("./routes/users");
 var sendStudent = require("./routes/users");
 var getAllStudents = require("./routes/users")
-
+var sendClasses = require("./routes/users");
 var createLesson = require("./routes/users");
 
 const cors = require("cors");
@@ -35,7 +35,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/login", loginRouter);
+app.use("/", loginRouter);
 app.use("/", getDirector);
 app.use("/", addDirector);
 app.use("/", sendTeacher);
@@ -44,6 +44,7 @@ app.use("/", getAllStudents)
 
 //school route //lesson
 app.use("/", createLesson);
+app.use("/", sendClasses);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

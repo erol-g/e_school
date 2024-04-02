@@ -43,10 +43,23 @@ const getAllStudents =
     }
   });
 
+const passwordControl =
+  (req, res) => {
+    
+    res.status(200).json({
+      status: true,
+      message: "success",
+      role:req.role
+    });
+  };
+
+
 module.exports = {
   getDirector,
   addDirector,
   sendTeacher,
   sendStudent,
   getAllStudents,
+  passwordControl,
+
 };
