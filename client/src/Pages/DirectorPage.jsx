@@ -1,8 +1,9 @@
+import PageHeader from "./HeaderPage"
 
 const DirectorPage = () => {
   return (
     <div className="page-container">
-        <h1>Director Page</h1>
+        <PageHeader title="Director Page" />
         <button>to register a student</button>
         <button>to create new class</button>
         <button>to see registered students</button>
