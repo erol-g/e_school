@@ -1,10 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css'
-import Login from './Login';
+import Login from './Pages/Login';
 import Home from './Pages/Home';
-import DirectorPage from '../DirectorPage';
-import TeachersPage from '../TeachersPage';
-import StudentsPage from '../StudentsPage';
+import DirectorPage from './Pages/DirectorPage';
+import TeachersPage from './Pages/TeachersPage';
+import StudentsPage from './Pages/StudentsPage';
 function App() {
 
   return (
