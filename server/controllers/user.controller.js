@@ -31,6 +31,18 @@ const sendStudent =
 
     res.json(req.body);
   });
+
+const getAllStudents =
+  ("/all-students",
+  async (req, res) => {
+    try {
+      const result = await Students.find({});
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
 const passwordControl =
   (req, res) => {
     
@@ -41,10 +53,13 @@ const passwordControl =
     });
   };
 
+
 module.exports = {
   getDirector,
   addDirector,
   sendTeacher,
   sendStudent,
+  getAllStudents,
   passwordControl,
+
 };

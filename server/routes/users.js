@@ -4,6 +4,7 @@ const {
   addDirector,
   sendTeacher,
   sendStudent,
+  getAllStudents,
   passwordControl,
   getAllUsers,
 } = require("../controllers/user.controller");
@@ -25,7 +26,9 @@ router.post("/addDirector",[roleControl], addDirector);
 router.post("/register-teacher",[roleControl], sendTeacher);
 router.post("/register-student",[roleControl], sendStudent);
 router.post("/create-lesson", createLesson);
+router.get("/all-students", getAllStudents);
 router.post("/register-class", sendClasses);
 router.post("/login",[passControl],passwordControl);
+
 
 module.exports = router;

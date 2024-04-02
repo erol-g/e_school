@@ -11,12 +11,11 @@ var getDirector = require("./routes/users");
 var addDirector = require("./routes/users");
 var sendTeacher = require("./routes/users");
 var sendStudent = require("./routes/users");
+var getAllStudents = require("./routes/users")
 var sendClasses = require("./routes/users");
-
 var createLesson = require("./routes/users");
 
 const cors = require("cors");
-
 var app = express();
 app.use(
   cors({
@@ -41,6 +40,7 @@ app.use("/", getDirector);
 app.use("/", addDirector);
 app.use("/", sendTeacher);
 app.use("/", sendStudent);
+app.use("/", getAllStudents)
 
 //school route //lesson
 app.use("/", createLesson);
