@@ -60,8 +60,8 @@ const updatePassword = async (req, res) => {
   if (req.path.includes("teacher")) Model = Teachers;
   if (req.path.includes("student")) Model = Students;
 
-  await Model.updateOne({ _id: req.params?.userId }, req.body);
-  const updatedData = await Model.findOne({ _id: req.params?.userId });
+  await Model.updateOne({ _id: req.params?.id }, req.body);
+  const updatedData = await Model.findOne({ _id: req.params?.id });
 
   res.json(updatedData);
 };

@@ -40,11 +40,8 @@ router.post("/register-class", sendClasses);
 router.post("/login", [passControl], passwordControl);
 
 /* Update password */
-// Director
-router.patch("/change-password/director/:userId", updatePassword);
-// Teacher
-router.patch("/change-password/teacher/:userId", updatePassword);
-// Student
-router.patch("/change-password/student/:userId", updatePassword);
+router.patch("/director/change-password/:id", updatePassword);
+router.patch("/teacher/change-password/:id", updatePassword);
+router.patch("/student/change-password/:id", updatePassword);
 
 module.exports = router;
