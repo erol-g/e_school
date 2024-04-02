@@ -89,6 +89,29 @@ const getMessage = async (req, res) => {
 };
 /* messages */
 
+const getAllStudents =
+  ("/all-students",
+  async (req, res) => {
+    try {
+      const result = await Students.find({});
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+const passwordControl =
+  (req, res) => {
+    
+    res.status(200).json({
+      status: true,
+      message: "success",
+      role:req.role
+    });
+  };
+
+
+
 module.exports = {
   getDirector,
   addDirector,
@@ -98,4 +121,8 @@ module.exports = {
   getStudentGrade,
   sendMessage,
   getMessage,
+  getAllStudents,
+  passwordControl,
+
+
 };

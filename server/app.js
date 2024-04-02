@@ -15,11 +15,11 @@ var sendStudent = require("./routes/users");
 var getStudentGrade = require("./routes/users");
 var sendMessage = require("./routes/users");
 var getMessage = require("./routes/users");
-
+var getAllStudents = require("./routes/users")
+var sendClasses = require("./routes/users");
 var createLesson = require("./routes/users");
 
 const cors = require("cors");
-
 var app = express();
 app.use(
   cors({
@@ -39,7 +39,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/login", loginRouter);
+app.use("/", loginRouter);
 app.use("/", getDirector);
 app.use("/", getStudent);
 app.use("/", addDirector);
@@ -48,9 +48,12 @@ app.use("/", sendStudent);
 app.use("/", sendMessage);
 app.use("/", getMessage);
 app.use("/", getStudentGrade);
+app.use("/", getAllStudents)
+
 
 //school route //lesson
 app.use("/", createLesson);
+app.use("/", sendClasses);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
