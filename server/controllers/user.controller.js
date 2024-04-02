@@ -54,6 +54,18 @@ const sendStudent =
     res.json(req.body);
   });
 
+const updatePassword = async (req, res) => {
+  let Model;
+  if (req.path.includes("director")) Model = Director;
+  if (req.path.includes("teacher")) Model = Teachers;
+  if (req.path.includes("student")) Model = Students;
+
+  await Model.updateOne({ _id: req.params?.id }, req.body);
+  const updatedData = await Model.findOne({ _id: req.params?.id });
+
+  res.json(updatedData);
+};
+
 /* messages */
 
 const sendMessage = async (req, res) => {
@@ -100,29 +112,24 @@ const getAllStudents =
     }
   });
 
-const passwordControl =
-  (req, res) => {
-    
-    res.status(200).json({
-      status: true,
-      message: "success",
-      role:req.role
-    });
-  };
-
-
+const passwordControl = (req, res) => {
+  res.status(200).json({
+    status: true,
+    message: "success",
+    role: req.role,
+  });
+};
 
 module.exports = {
   getDirector,
   addDirector,
   sendTeacher,
   sendStudent,
+  updatePassword,
   getStudent,
   getStudentGrade,
   sendMessage,
   getMessage,
   getAllStudents,
   passwordControl,
-
-
 };
