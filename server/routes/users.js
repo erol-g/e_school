@@ -5,6 +5,7 @@ const {
   getStudent,
   sendTeacher,
   sendStudent,
+  getStudentsByClass,
   updatePassword,
   getStudentGrade,
   sendMessage,
@@ -26,11 +27,13 @@ var router = express.Router();
 router.get("/", function (req, res, next) {
   res.send("respond with a resource");
 });
+
 router.get("/getDirector", getDirector);
 router.post("/addDirector", [roleControl], addDirector);
 router.post("/register-teacher", [roleControl], sendTeacher);
 router.post("/register-student", [roleControl], sendStudent);
 router.post("/create-lesson", createLesson);
+router.get("/students/:className", getStudentsByClass);
 router.post("/sendMessage", sendMessage);
 router.get("/getMessage/:id", getMessage);
 router.get("/getStudent", getStudent);

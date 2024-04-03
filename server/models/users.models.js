@@ -38,6 +38,7 @@ const studentsSchema = new Schema({
   address: {
     type: String,
   },
+  className: String,
   role:{
     type: String,
     required: true,

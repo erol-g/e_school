@@ -53,6 +53,16 @@ const sendStudent =
     res.json(data);
   });
 
+const getStudentsByClass = async (req, res) => {
+  try {
+    const className = req.params.className;
+    const students = await User.find({ className });
+    res.json(students);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const updatePassword = async (req, res) => {
   let Model;
   if (req.path.includes("director")) Model = Director;
@@ -126,6 +136,7 @@ module.exports = {
   addDirector,
   sendTeacher,
   sendStudent,
+  getStudentsByClass,
   updatePassword,
   getStudent,
   getStudentGrade,
