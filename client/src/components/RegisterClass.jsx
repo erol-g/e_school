@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const RegisterClass = () => {
   const [className, setClassName] = useState("");
-  const [existingClasses, setExistingClasses] = useState([]);
+  // const [existingClasses, setExistingClasses] = useState([]);
 
   //   useEffect(() => {
   //     // Fetch existing classes from the backend when the component mounts
