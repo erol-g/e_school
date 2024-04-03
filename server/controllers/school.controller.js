@@ -10,8 +10,8 @@ const sendClasses =
   ("/register-class",
   async (req, res) => {
     try {
-      await Classes.create(req.body);
-      res.status(201).json(req.body);
+      const data = await Classes.create(req.body);
+      res.status(201).json(data);
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
@@ -20,4 +20,3 @@ const sendClasses =
 //students:
 
 module.exports = { createLesson, sendClasses };
-
