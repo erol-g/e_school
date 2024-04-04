@@ -1,9 +1,11 @@
 .notifications-table {
   width: 100%;
   margin-bottom: 20px;
+  color: red;
 }
 
-.notifications-table th, .notifications-table td {
+.notifications-table th,
+.notifications-table td {
   border: 1px solid #0056b3;
   padding: 8px;
 }
@@ -12,7 +14,7 @@
   background-color: #d1d1d1;
 }
 
-.notifications-table th:nth-child(n+4) {
+.notifications-table th:nth-child(n + 4) {
   text-align: center;
 }
 
@@ -72,7 +74,7 @@
   text-overflow: ellipsis; /* Display ellipsis (...) when text overflows */
 }
 
-.row{
+.row {
   border: 1px solid black;
   padding-top: 5px;
 }
