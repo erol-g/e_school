@@ -4,7 +4,9 @@ const {
   addDirector,
   getStudent,
   sendTeacher,
+  deleteTeacher,
   sendStudent,
+  getSchoolInfo,
   getStudentsByClass,
   updatePassword,
   getStudentGrade,
@@ -13,6 +15,7 @@ const {
   getAllStudents,
   passwordControl,
   getAllUsers,
+  
 } = require("../controllers/user.controller");
 
 const {
@@ -29,6 +32,8 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/getDirector", getDirector);
+router.get("/getSchoolInfo", getSchoolInfo);
+router.delete("/remove-teacher/:id", deleteTeacher);
 router.post("/addDirector", [roleControl], addDirector);
 router.post("/register-teacher", [roleControl], sendTeacher);
 router.post("/register-student", [roleControl], sendStudent);
