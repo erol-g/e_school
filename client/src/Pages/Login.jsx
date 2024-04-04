@@ -28,7 +28,7 @@ const Login = () => {
         setName(res.name);
         localStorage.setItem(
           "userInfo",
-          JSON.stringify({ name: res.name, role: res.role })
+          JSON.stringify({ name: res.name, role: res.role, id: res.id })
         );
         switch (res.role) {
           case "director":
