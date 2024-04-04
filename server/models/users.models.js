@@ -74,6 +74,9 @@ const studentsSchema = new Schema({
       },
     },
   ],
+}, {
+  collection: "students",
+  timestamps: true,
 });
 
 const teachersSchema = new Schema({
@@ -90,11 +93,17 @@ const teachersSchema = new Schema({
   address: {
     type: String,
   },
-  role: {
+
+}, 
+ role: {
     type: String,
     required: true,
-  },
+  },                                
+ }, {
+  collection: "lessons",
+  timestamps: true,
 });
+
 const lessonsSchema = new Schema({
   name: {
     type: String,
@@ -104,6 +113,9 @@ const lessonsSchema = new Schema({
     type: String,
     required: true,
   },
+}, {
+  collection: "lessons",
+  timestamps: true,
 });
 
 const messageSchema = new Schema({

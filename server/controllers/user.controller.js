@@ -23,6 +23,7 @@ const getSchoolInfo =
 	});
 
 //Student
+
 const getStudent =
   ("/getStudent",
   async (req, res) => {
@@ -30,6 +31,7 @@ const getStudent =
 
     res.json(result);
   });
+
 const getStudentGrade =
   ("/getGrade/:id",
   async (req, res) => {
@@ -158,6 +160,25 @@ const passwordControl = (req, res) => {
   });
 };
 
+const deleteStudent = 
+("/delete-student/:id",
+async (req, res) => {
+  try{
+    const {id} = req.params;
+    const result = await Students.findByIdAndDelete(id);
+
+    if(!result){
+      return res.status(404).json({message: 'Student not found'});
+    }
+    return res.status(200).send({message: 'Student deleted succesfully'})
+
+  }catch(error){
+    console.log(error.message);
+    res.status(500).send({message:error.message})
+  }
+}
+)
+
 module.exports = {
   getDirector,
   addDirector,
@@ -173,5 +194,8 @@ module.exports = {
   passwordControl,
   getSchoolInfo,
   deleteTeacher
-
+  deleteStudent
 };
+
+
+
