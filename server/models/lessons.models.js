@@ -28,8 +28,6 @@ const lessonSchema = new Schema({
   },
 });
 
-
-
-const Lesson = model("lessons", lessonSchema);
+const Lesson = model("Lessons", lessonSchema);
 
 module.exports = { Lesson };

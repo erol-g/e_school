@@ -18,9 +18,25 @@ const directorSchema = new Schema({
   address: {
     type: String,
   },
-  role:{
-  type: String,
-  required: true,
+  role: {
+    type: String,
+    required: true,
+  },
+});
+
+const schoolInfoSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+  },
+  tel: {
+    type: Number,
+  },
+  address: {
+    type: String,
   },
 });
 
@@ -39,10 +55,13 @@ const studentsSchema = new Schema({
     type: String,
   },
   className: String,
-  role:{
+  role: {
     type: String,
-    required: true,
-    },
+  },
+  className: {
+    type: String,
+    ref: "Classes",
+  },
   grades: [
     {
       name: {
@@ -55,6 +74,9 @@ const studentsSchema = new Schema({
       },
     },
   ],
+}, {
+  collection: "students",
+  timestamps: true,
 });
 
 const teachersSchema = new Schema({
@@ -71,11 +93,17 @@ const teachersSchema = new Schema({
   address: {
     type: String,
   },
-  role:{
+
+}, 
+ role: {
     type: String,
     required: true,
-    },
+  },                                
+ }, {
+  collection: "lessons",
+  timestamps: true,
 });
+
 const lessonsSchema = new Schema({
   name: {
     type: String,
@@ -85,6 +113,9 @@ const lessonsSchema = new Schema({
     type: String,
     required: true,
   },
+}, {
+  collection: "lessons",
+  timestamps: true,
 });
 
 const messageSchema = new Schema({
@@ -100,18 +131,28 @@ const classesSchema = new Schema({
     type: String,
     required: true,
   },
-  studentList: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Students',
-  }],
-})
+  studentList: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Students",
+    },
+  ],
+});
 
-const Director = model("directors", directorSchema);
-const Teachers = model("teachers", teachersSchema);
-const Students = model("students", studentsSchema);
-const Lessons = model("lessons", lessonsSchema);
+const Director = model("Directors", directorSchema);
+const Teachers = model("Teachers", teachersSchema);
+const Students = model("Students", studentsSchema);
+const Lessons = model("Lessons", lessonsSchema);
+const SchoolInfo = model("SchoolInfo", schoolInfoSchema);
 const Message = model("Message", messageSchema);
-const Classes = model("classes", classesSchema)
+const Classes = model("Classes", classesSchema);
 
-module.exports = { Director, Teachers, Students, Lessons, Classes, Message };
-
+module.exports = {
+  Director,
+  Teachers,
+  Students,
+  Lessons,
+  SchoolInfo,
+  Classes,
+  Message,
+};
