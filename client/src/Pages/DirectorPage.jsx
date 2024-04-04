@@ -1,10 +1,14 @@
+import { useNavigate } from "react-router"
 import PageHeader from "./HeaderPage"
 
 const DirectorPage = () => {
+
+  const navigate = useNavigate();
+  
   return (
-    <div className="page-container">
+    <div className="page-container" >
         <PageHeader title="Director Page" />
-        <button>to register a student</button>
+        <button onClick={() => navigate ('/register-student')}>to register a student</button>
         <button>to create new class</button>
         <button>to see registered students</button>
         <button>to see student grade information</button>
