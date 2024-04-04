@@ -1,17 +1,26 @@
 const {
-  Director,
-  Teachers,
-  Students,
+	Director,
+	Teachers,
+	Students,
+	SchoolInfo,
   Message,
 } = require("../models/users.models.js");
 
 const getDirector =
-  ("/getDirector",
-  async (req, res) => {
-    const result = await Director.find({});
+	("/getDirector",
+	async (req, res) => {
+		const result = await Director.find({});
 
-    res.json(result);
-  });
+		res.json(result);
+	});
+
+const getSchoolInfo =
+	("/getSchoolInfo",
+	async (req, res) => {
+		const result = await SchoolInfo.find({});
+
+		res.json(result);
+	});
 
 //Student
 const getStudent =
@@ -28,6 +37,23 @@ const getStudentGrade =
     const grades = result.grades;
     res.json(grades);
   });
+
+const deleteTeacher =
+	("/remove-teacher",
+	async (req, res) => {
+		try {
+			const deletedTeacher = await Teachers.findByIdAndDelete(req.params.id);
+			if (!deletedTeachers) {
+				return res
+					.status(404)
+					.json({ error: `Teacher with ID ${deletedTeacher} not found` });
+			}
+			await deletedTeacher.remove();
+			res.json({ message: "Teacher deleted successfully" });
+		} catch (error) {
+			res.status(500).json({ message: error.message });
+		}
+	});
 
 const addDirector =
   ("/addDirector",
@@ -144,4 +170,7 @@ module.exports = {
   getMessage,
   getAllStudents,
   passwordControl,
+  getSchoolInfo,
+  deleteTeacher
+
 };
