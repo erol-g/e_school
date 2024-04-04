@@ -3,9 +3,6 @@ const {
 	Teachers,
 	Students,
 	SchoolInfo,
-  Director,
-  Teachers,
-  Students,
   Message,
 } = require("../models/users.models.js");
 
