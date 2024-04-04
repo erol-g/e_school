@@ -27,18 +27,18 @@ const passControl = async (req, res, next) => {
   }
 };
 
-const roleControl = (req, res, next) => {
-  const endpoint = req.path;
-  const roleRequested = req.body.role;
+// const roleControl = (req, res, next) => {
+//   const endpoint = req.path;
+//   const roleRequested = req.body.role;
 
-  if (endpoint === "/register-student" && roleRequested !== "student") {
-    return res.status(400).json({ error: "Invalid role for this endpoint" });
-  } else if (endpoint === "/register-teacher" && roleRequested !== "teacher") {
-    return res.status(400).json({ error: "Invalid role for this endpoint" });
-  } else if (endpoint === "/addDirector" && roleRequested !== "director") {
-    return res.status(400).json({ error: "Invalid role for this endpoint" });
-  }
-  next();
-};
+//   if (endpoint === "/register-student" && roleRequested !== "student") {
+//     return res.status(400).json({ error: "Invalid role for this endpoint" });
+//   } else if (endpoint === "/register-teacher" && roleRequested !== "teacher") {
+//     return res.status(400).json({ error: "Invalid role for this endpoint" });
+//   } else if (endpoint === "/addDirector" && roleRequested !== "director") {
+//     return res.status(400).json({ error: "Invalid role for this endpoint" });
+//   }
+//   next();
+// };
 
-module.exports = { passControl, roleControl };
+module.exports = { passControl };

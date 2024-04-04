@@ -74,6 +74,7 @@ const sendTeacher =
 const sendStudent =
   ("/register-student",
   async (req, res) => {
+    req.body.role = "student";
     const data = await Students.create(req.body);
 
     res.json(data);
