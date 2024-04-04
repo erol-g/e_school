@@ -18,6 +18,26 @@ const directorSchema = new Schema({
   address: {
     type: String,
   },
+  role: {
+    type: String,
+    required: true,
+  },
+});
+
+const schoolInfoSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+  },
+  tel: {
+    type: Number,
+  },
+  address: {
+    type: String,
+  },
 });
 
 const studentsSchema = new Schema({
@@ -33,6 +53,14 @@ const studentsSchema = new Schema({
   },
   address: {
     type: String,
+  },
+  className: String,
+  role: {
+    type: String,
+  },
+  className: {
+    type: String,
+    ref: "Classes",
   },
   grades: [
     {
@@ -65,10 +93,17 @@ const teachersSchema = new Schema({
   address: {
     type: String,
   },
-}, {
-  collection: "teachers",
+
+}, 
+ role: {
+    type: String,
+    required: true,
+  },                                
+ }, {
+  collection: "lessons",
   timestamps: true,
 });
+
 const lessonsSchema = new Schema({
   name: {
     type: String,
@@ -83,9 +118,41 @@ const lessonsSchema = new Schema({
   timestamps: true,
 });
 
-const Director = model("directors", directorSchema);
-const Teachers = model("teachers", teachersSchema);
-const Students = model("students", studentsSchema);
-const Lessons = model("lessons", lessonsSchema);
+const messageSchema = new Schema({
+  sender: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  recipient: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  content: { type: String, required: true },
+  senderName: { type: String },
+  createdAt: { type: Date, default: Date.now },
+});
 
-module.exports = { Director, Teachers, Students, Lessons };
+const classesSchema = new Schema({
+  className: {
+    type: String,
+    required: true,
+  },
+  studentList: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Students",
+    },
+  ],
+});
+
+const Director = model("Directors", directorSchema);
+const Teachers = model("Teachers", teachersSchema);
+const Students = model("Students", studentsSchema);
+const Lessons = model("Lessons", lessonsSchema);
+const SchoolInfo = model("SchoolInfo", schoolInfoSchema);
+const Message = model("Message", messageSchema);
+const Classes = model("Classes", classesSchema);
+
+module.exports = {
+  Director,
+  Teachers,
+  Students,
+  Lessons,
+  SchoolInfo,
+  Classes,
+  Message,
+};
