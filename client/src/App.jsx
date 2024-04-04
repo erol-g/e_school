@@ -6,7 +6,6 @@ import DirectorPage from "./Pages/DirectorPage";
 import TeachersPage from "./Pages/TeachersPage";
 import StudentsPage from "./Pages/StudentsPage";
 import Notifications from "./Pages/DirectorPages/Notifications";
-import NotificationDetails from "./Pages/DirectorPages/NotificationDetails";
 function App() {
   return (
     <>
@@ -17,7 +16,6 @@ function App() {
         <Route path="/teacher-page" element={<TeachersPage />}></Route>
         <Route path="/student-page" element={<StudentsPage />}></Route>
         <Route path="/notifications" element={<Notifications />}></Route>
-        <Route path="/notifications/:id" element={<NotificationDetails />}></Route>
       </Routes>
     </>
   );
