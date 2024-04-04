@@ -57,7 +57,10 @@ const studentsSchema = new Schema({
   className: String,
   role:{
     type: String,
-    required: true,
+    },
+    className:{
+      type: String,
+      ref:"classes"
     },
   grades: [
     {

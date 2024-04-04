@@ -20,6 +20,7 @@ var getMessage = require("./routes/users");
 var getAllStudents = require("./routes/users")
 var sendClasses = require("./routes/users");
 var createLesson = require("./routes/users");
+var getAllClasses = require("./routes/users");
 
 const cors = require("cors");
 var app = express();
@@ -53,6 +54,7 @@ app.use("/", sendMessage);
 app.use("/", getMessage);
 app.use("/", getStudentGrade);
 app.use("/", getAllStudents)
+app.use("/", getAllClasses)
 
 
 //school route //lesson
