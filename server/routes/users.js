@@ -6,6 +6,7 @@ const {
   sendTeacher,
   deleteTeacher,
   sendStudent,
+  deleteStudent,
   getSchoolInfo,
   getStudentsByClass,
   updatePassword,
@@ -24,6 +25,7 @@ const {
 } = require("../controllers/school.controller");
 const { passControl } = require("../middlewares");
 
+
 var router = express.Router();
 
 /* GET users listing. */
@@ -38,6 +40,8 @@ router.post("/addDirector", addDirector);
 router.post("/register-teacher", sendTeacher);
 router.post("/register-student", sendStudent);
 router.post("/create-lesson", createLesson);
+router.delete("/delete-student/:id", deleteStudent);
+router.delete("/delete-class/:id", deleteClass);
 router.get("/students/:className", getStudentsByClass);
 router.post("/sendMessage", sendMessage);
 router.get("/getMessage/:id", getMessage);
@@ -52,5 +56,6 @@ router.get("/all-classes", getAllClasses);
 router.patch("/director/change-password/:id", updatePassword);
 router.patch("/teacher/change-password/:id", updatePassword);
 router.patch("/student/change-password/:id", updatePassword);
+
 
 module.exports = router;
