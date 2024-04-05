@@ -5,6 +5,7 @@ import Home from "./Pages/Home";
 import DirectorPage from "./Pages/DirectorPage";
 import TeachersPage from "./Pages/TeachersPage";
 import StudentsPage from "./Pages/StudentsPage";
+import RegisterClass from "./components/RegisterClass";
 import Notifications from "./Pages/DirectorPages/Notifications";
 import AllStudents from "./Pages/AllStudents";
 import RegisterStudentPage from "./Pages/RegisterStudentPage";
@@ -19,6 +20,7 @@ function App() {
         <Route path="/director-page" element={<DirectorPage />}></Route>
         <Route path="/teacher-page" element={<TeachersPage />}></Route>
         <Route path="/student-page" element={<StudentsPage />}></Route>
+        <Route path="/register-class" element={<RegisterClass />}></Route>
         <Route path="/notifications" element={<Notifications />}></Route>
         <Route path="/all-students" element={<AllStudents />}></Route>
         <Route
