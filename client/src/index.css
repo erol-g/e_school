@@ -3,15 +3,18 @@
   line-height: 1.5;
   font-weight: 400;
 
+
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: #000;
+  background-color: #fff;
+
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 
 a {
   font-weight: 500;
@@ -22,6 +25,7 @@ a:hover {
   color: #535bf2;
 }
 
+
 body {
   margin: 0;
   display: flex;
@@ -29,6 +33,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
+
 
 h1 {
   font-size: 3.2em;
@@ -42,12 +47,11 @@ input, button, select {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #e1f4f6;
-  cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
   border-color: #646cff;
+  cursor: pointer;
 }
 button:focus,
 button:focus-visible {

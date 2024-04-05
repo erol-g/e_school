@@ -17,7 +17,7 @@ const DirectorPage = () => {
       <button>to change password</button>
       <button>to see general information of the school</button>
       <button>to send a message</button>
-      <button>to read your message</button>
+      <button onClick={() => navigate("/notifications")}>to read your message</button>
       <button>to see your personal information</button>
     </div>
   );
