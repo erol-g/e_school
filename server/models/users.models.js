@@ -11,6 +11,7 @@ const directorSchema = new Schema({
   },
   email: {
     type: String,
+    unique: true,
   },
   password: {
     type: Number,
@@ -31,6 +32,7 @@ const schoolInfoSchema = new Schema({
   },
   email: {
     type: String,
+    unique: true,
   },
   tel: {
     type: Number,
@@ -48,6 +50,8 @@ const studentsSchema = new Schema(
     },
     email: {
       type: String,
+      unique: true,
+
     },
     password: {
       type: Number,
@@ -55,12 +59,11 @@ const studentsSchema = new Schema(
     address: {
       type: String,
     },
-    className: String,
     role: {
       type: String,
     },
-    className: {
-      type: String,
+    classId: {
+      type:Schema.Types.ObjectId,
       ref: "Classes",
     },
     grades: [
@@ -90,6 +93,8 @@ const teachersSchema = new Schema(
     },
     email: {
       type: String,
+     unique: true,
+
     },
     password: {
       type: Number,
