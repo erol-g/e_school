@@ -40,83 +40,91 @@ const schoolInfoSchema = new Schema({
   },
 });
 
-const studentsSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-  },
-  password: {
-    type: Number,
-  },
-  address: {
-    type: String,
-  },
-  className: String,
-  role: {
-    type: String,
-  },
-  className: {
-    type: String,
-    ref: "Classes",
-  },
-  grades: [
-    {
-      name: {
-        type: String,
-        required: true,
-      },
-      result: {
-        type: Number,
-        required: true,
-      },
+const studentsSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
     },
-  ],
-}, {
-  collection: "students",
-  timestamps: true,
-});
+    email: {
+      type: String,
+    },
+    password: {
+      type: Number,
+    },
+    address: {
+      type: String,
+    },
+    className: String,
+    role: {
+      type: String,
+    },
+    className: {
+      type: String,
+      ref: "Classes",
+    },
+    grades: [
+      {
+        name: {
+          type: String,
+          required: true,
+        },
+        result: {
+          type: Number,
+          required: true,
+        },
+      },
+    ],
+  },
+  {
+    collection: "students",
+    timestamps: true,
+  }
+);
 
-const teachersSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-  },
-  password: {
-    type: Number,
-  },
-  address: {
-    type: String,
+const teachersSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+    },
+    password: {
+      type: Number,
+    },
+    address: {
+      type: String,
+    },
+    role: {
+      type: String,
+      required: true,
+    },
   },
 
-}, 
- role: {
-    type: String,
-    required: true,
-  },                                
- }, {
-  collection: "lessons",
-  timestamps: true,
-});
+  {
+    collection: "teachers",
+    timestamps: true,
+  }
+);
 
-const lessonsSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
+const lessonsSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    teacherName: {
+      type: String,
+      required: true,
+    },
   },
-  teacherName: {
-    type: String,
-    required: true,
-  },
-}, {
-  collection: "lessons",
-  timestamps: true,
-});
+  {
+    collection: "lessons",
+    timestamps: true,
+  }
+);
 
 const messageSchema = new Schema({
   sender: { type: Schema.Types.ObjectId, ref: "User", required: true },

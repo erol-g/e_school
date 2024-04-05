@@ -6,6 +6,7 @@ import DirectorPage from "./Pages/DirectorPage";
 import TeachersPage from "./Pages/TeachersPage";
 import StudentsPage from "./Pages/StudentsPage";
 import ChangePassword from "./Pages/ChangePassword";
+import Notifications from "./Pages/DirectorPages/Notifications";
 import AllStudents from "./Pages/AllStudents";
 import RegisterStudentPage from "./Pages/RegisterStudentPage";
 import { ToastContainer } from "react-toastify";
@@ -21,6 +22,7 @@ function App() {
         <Route path="/teacher-page" element={<TeachersPage />}></Route>
         <Route path="/student-page" element={<StudentsPage />}></Route>
         <Route path="/change-password" element={<ChangePassword />}></Route>
+        <Route path="/notifications" element={<Notifications />}></Route>
         <Route path="/all-students" element={<AllStudents />}></Route>
         <Route
           path="/register-student"

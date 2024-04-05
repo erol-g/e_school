@@ -15,16 +15,15 @@ const {
   getMessage,
   getAllStudents,
   passwordControl,
-  
 } = require("../controllers/user.controller");
 
 const {
   createLesson,
   sendClasses,
   getAllClasses,
+  deleteClass,
 } = require("../controllers/school.controller");
 const { passControl } = require("../middlewares");
-
 
 var router = express.Router();
 
@@ -56,6 +55,5 @@ router.get("/all-classes", getAllClasses);
 router.patch("/director/change-password/:id", updatePassword);
 router.patch("/teacher/change-password/:id", updatePassword);
 router.patch("/student/change-password/:id", updatePassword);
-
 
 module.exports = router;
