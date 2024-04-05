@@ -31,7 +31,7 @@ const RegisterStudentPage = () => {
         email: email,
         password: password,
         name: name,
-        className: className,
+        classId: className,
       }),
     })
       .then((res) => res.json())
@@ -78,7 +78,7 @@ const RegisterStudentPage = () => {
         >
           <option value="">Select a class</option>
           {classList.map((classItem) => (
-            <option key={classItem.id} value={classItem.name}>
+            <option key={classItem._id} value={classItem._id}>
               {classItem.className}
             </option>
           ))}

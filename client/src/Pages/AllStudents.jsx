@@ -63,7 +63,7 @@ const AllStudents = () => {
                   {student.email}
                 </td>
                 <td style={{ border: "1px solid #dddddd", padding: "8px" }}>
-                  {student?.className}
+                  {student?.classId?.className}
                 </td>
               </tr>
             ))}
