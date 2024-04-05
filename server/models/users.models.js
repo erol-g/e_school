@@ -18,13 +18,13 @@ const directorSchema = new Schema({
   address: {
     type: String,
   },
-  role:{
-  type: String,
-  required: true,
+  role: {
+    type: String,
+    required: true,
   },
 });
 
-const studentsSchema = new Schema({
+const schoolInfoSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -32,60 +32,99 @@ const studentsSchema = new Schema({
   email: {
     type: String,
   },
-  password: {
+  tel: {
     type: Number,
   },
   address: {
     type: String,
   },
-  className: String,
-  role:{
-    type: String,
-    required: true,
-    },
-  grades: [
-    {
-      name: {
-        type: String,
-        required: true,
-      },
-      result: {
-        type: Number,
-        required: true,
-      },
-    },
-  ],
 });
 
-const teachersSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-  },
-  password: {
-    type: Number,
-  },
-  address: {
-    type: String,
-  },
-  role:{
-    type: String,
-    required: true,
+const studentsSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
     },
-});
-const lessonsSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
+    email: {
+      type: String,
+    },
+    password: {
+      type: Number,
+    },
+    address: {
+      type: String,
+    },
+    className: String,
+    role: {
+      type: String,
+    },
+    className: {
+      type: String,
+      ref: "Classes",
+    },
+    grades: [
+      {
+        name: {
+          type: String,
+          required: true,
+        },
+        result: {
+          type: Number,
+          required: true,
+        },
+      },
+    ],
   },
-  teacherName: {
-    type: String,
-    required: true,
+  {
+    collection: "students",
+    timestamps: true,
+  }
+);
+
+const teachersSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+    },
+    password: {
+      type: Number,
+    },
+    address: {
+      type: String,
+    },
+    role: {
+      type: String,
+      required: true,
+    },
   },
-});
+
+  {
+    collection: "teachers",
+    timestamps: true,
+  }
+);
+
+const lessonsSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    teacherName: {
+      type: String,
+      required: true,
+    },
+  },
+  {
+    collection: "lessons",
+    timestamps: true,
+  }
+);
 
 const messageSchema = new Schema({
   sender: { type: Schema.Types.ObjectId, ref: "User", required: true },
@@ -100,18 +139,28 @@ const classesSchema = new Schema({
     type: String,
     required: true,
   },
-  studentList: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Students',
-  }],
-})
+  studentList: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Students",
+    },
+  ],
+});
 
-const Director = model("directors", directorSchema);
-const Teachers = model("teachers", teachersSchema);
-const Students = model("students", studentsSchema);
-const Lessons = model("lessons", lessonsSchema);
+const Director = model("Directors", directorSchema);
+const Teachers = model("Teachers", teachersSchema);
+const Students = model("Students", studentsSchema);
+const Lessons = model("Lessons", lessonsSchema);
+const SchoolInfo = model("SchoolInfo", schoolInfoSchema);
 const Message = model("Message", messageSchema);
-const Classes = model("classes", classesSchema)
+const Classes = model("Classes", classesSchema);
 
-module.exports = { Director, Teachers, Students, Lessons, Classes, Message };
-
+module.exports = {
+  Director,
+  Teachers,
+  Students,
+  Lessons,
+  SchoolInfo,
+  Classes,
+  Message,
+};

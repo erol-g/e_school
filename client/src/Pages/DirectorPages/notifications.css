@@ -1,0 +1,38 @@
+.notifications-table {
+  width: 100%;
+  margin-bottom: 20px;
+  color: red;
+}
+
+.notifications-table th,
+.notifications-table td {
+  border: 1px solid #0056b3;
+  padding: 8px;
+}
+
+.notifications-table th {
+  background-color: #d1d1d1;
+}
+
+.notifications-table th:nth-child(n + 4) {
+  text-align: center;
+}
+
+.notifications-table td {
+  text-align: left;
+}
+
+.notifications-table button {
+  cursor: pointer;
+  margin-right: 5px;
+  padding: 5px 10px;
+  width: 20px;
+}
+
+.notifications-table button:last-child {
+  margin-right: 0;
+}
+
+.notifications-table button:hover {
+  background-color: #0056b3;
+}

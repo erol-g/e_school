@@ -2,6 +2,7 @@ const {
   Director,
   Teachers,
   Students,
+  SchoolInfo,
   Message,
 } = require("../models/users.models.js");
 
@@ -13,7 +14,16 @@ const getDirector =
     res.json(result);
   });
 
+const getSchoolInfo =
+  ("/getSchoolInfo",
+  async (req, res) => {
+    const result = await SchoolInfo.find({});
+
+    res.json(result);
+  });
+
 //Student
+
 const getStudent =
   ("/getStudent",
   async (req, res) => {
@@ -21,12 +31,30 @@ const getStudent =
 
     res.json(result);
   });
+
 const getStudentGrade =
   ("/getGrade/:id",
   async (req, res) => {
     const result = await Students.findById(req.params.id);
     const grades = result.grades;
     res.json(grades);
+  });
+
+const deleteTeacher =
+  ("/remove-teacher",
+  async (req, res) => {
+    try {
+      const deletedTeacher = await Teachers.findByIdAndDelete(req.params.id);
+      if (!deletedTeachers) {
+        return res
+          .status(404)
+          .json({ error: `Teacher with ID ${deletedTeacher} not found` });
+      }
+      await deletedTeacher.remove();
+      res.json({ message: "Teacher deleted successfully" });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
   });
 
 const addDirector =
@@ -48,6 +76,7 @@ const sendTeacher =
 const sendStudent =
   ("/register-student",
   async (req, res) => {
+    req.body.role = "student";
     const data = await Students.create(req.body);
 
     res.json(data);
@@ -131,6 +160,23 @@ const passwordControl = (req, res) => {
   });
 };
 
+const deleteStudent =
+  ("/delete-student/:id",
+  async (req, res) => {
+    try {
+      const { id } = req.params;
+      const result = await Students.findByIdAndDelete(id);
+
+      if (!result) {
+        return res.status(404).json({ message: "Student not found" });
+      }
+      return res.status(200).send({ message: "Student deleted succesfully" });
+    } catch (error) {
+      console.log(error.message);
+      res.status(500).send({ message: error.message });
+    }
+  });
+
 module.exports = {
   getDirector,
   addDirector,
@@ -144,4 +190,7 @@ module.exports = {
   getMessage,
   getAllStudents,
   passwordControl,
+  getSchoolInfo,
+  deleteTeacher,
+  deleteStudent,
 };
