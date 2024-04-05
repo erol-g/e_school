@@ -8,10 +8,12 @@ import StudentsPage from "./Pages/StudentsPage";
 import ChangePassword from "./Pages/ChangePassword";
 import AllStudents from "./Pages/AllStudents";
 import RegisterStudentPage from "./Pages/RegisterStudentPage";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <>
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/login" element={<Login />}></Route>
