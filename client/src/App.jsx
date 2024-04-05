@@ -9,6 +9,7 @@ import RegisterClass from "./components/RegisterClass";
 import Notifications from "./Pages/DirectorPages/Notifications";
 import AllStudents from "./Pages/AllStudents";
 import RegisterStudentPage from "./Pages/RegisterStudentPage";
+import RegisterTeacherPage from "./Pages/RegisterTeacherPage";
 
 function App() {
   return (
@@ -25,6 +26,10 @@ function App() {
         <Route
           path="/register-student"
           element={<RegisterStudentPage />}
+        ></Route>
+         <Route
+          path="/register-teacher"
+          element={<RegisterTeacherPage/>}
         ></Route>
       </Routes>
     </>

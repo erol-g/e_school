@@ -7,9 +7,10 @@ const DirectorPage = () => {
   return (
     <div className="page-container">
       <PageHeader title="Director Page" />
-      <button onClick={() => navigate("/register-student")}>
-        to register a student
-      </button>
+      <button onClick={() => navigate ('/register-student')}>
+    to register a student</button>
+    <button onClick={() => navigate ('/register-teacher')}>
+    to register a teacher</button>
       <button>to create new class</button>
       <button onClick={() => navigate("/all-students")}>
         to see registered students
