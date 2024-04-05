@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ChangePassword = () => {
   const [password, setPassword] = useState("");
@@ -17,11 +18,19 @@ const ChangePassword = () => {
         body: JSON.stringify({ password }),
       }
     )
-      .then(alert("Password updated"))
-      .then(() => navigate(-1));
+      .then((res) => {
+        if (res.ok) {
+          toast.success("Password is changed successfully!");
+          navigate(-1);
+        } else {
+          throw new Error(`${res.status} ${res.statusText}`);
+        }
+      })
+      .catch((err) => toast.error(err.message));
   };
   return (
-    <div>
+    <div className="page-container">
+      <h1>Change your password</h1>
       <form onSubmit={(e) => handleSubmit(e)}>
         <input
           type="text"
@@ -29,6 +38,7 @@ const ChangePassword = () => {
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          placeholder="Type your new password"
         />
         <button type="submit">Submit</button>
       </form>
