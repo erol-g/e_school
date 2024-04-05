@@ -21,9 +21,9 @@ var getAllStudents = require("./routes/users")
 var sendClasses = require("./routes/users");
 var createLesson = require("./routes/users");
 var getAllClasses = require("./routes/users");
-
 var deleteStudent = require("./routes/users")
 var deleteClass = require("./routes/users")
+var getAllTeachers = require("./routes/users")
 
 
 const cors = require("cors");
@@ -60,6 +60,7 @@ app.use("/", getMessage);
 app.use("/", getStudentGrade);
 app.use("/", getAllStudents)
 app.use("/", getAllClasses)
+app.use("/", getAllTeachers)
 
 
 //school route //lesson
