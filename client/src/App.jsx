@@ -8,8 +8,10 @@ import StudentsPage from "./Pages/StudentsPage";
 import ChangePassword from "./Pages/ChangePassword";
 import Notifications from "./Pages/DirectorPages/Notifications";
 import AllStudents from "./Pages/AllStudents";
-import RegisterStudentPage from "./Pages/RegisterStudentPage";
 import { ToastContainer } from "react-toastify";
+import RegisterClass from "./components/RegisterClass";
+import RegisterStudentPage from "./Pages/RegisterStudentPage";
+import RegisterTeacherPage from "./Pages/RegisterTeacherPage";
 
 function App() {
   return (
@@ -22,11 +24,16 @@ function App() {
         <Route path="/teacher-page" element={<TeachersPage />}></Route>
         <Route path="/student-page" element={<StudentsPage />}></Route>
         <Route path="/change-password" element={<ChangePassword />}></Route>
+        <Route path="/register-class" element={<RegisterClass />}></Route>
         <Route path="/notifications" element={<Notifications />}></Route>
         <Route path="/all-students" element={<AllStudents />}></Route>
         <Route
           path="/register-student"
           element={<RegisterStudentPage />}
+        ></Route>
+        <Route
+          path="/register-teacher"
+          element={<RegisterTeacherPage />}
         ></Route>
       </Routes>
     </>

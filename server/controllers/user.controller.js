@@ -68,6 +68,7 @@ const addDirector =
 const sendTeacher =
   ("/register-teacher",
   async (req, res) => {
+    req.body.role = "teacher";
     const data = await Teachers.create(req.body);
 
     res.json(data);
@@ -143,7 +144,18 @@ const getAllStudents =
   ("/all-students",
   async (req, res) => {
     try {
-      const result = await Students.find({});
+      const result = await Students.find({}).populate('classId');
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  const getAllTeachers =
+  ("/all-teachers",
+  async (req, res) => {
+    try {
+      const result = await Teachers.find({}).populate('classIds');
       res.status(200).json(result);
     } catch (error) {
       res.status(500).json({ message: error.message });
@@ -193,4 +205,5 @@ module.exports = {
   getSchoolInfo,
   deleteTeacher,
   deleteStudent,
+  getAllTeachers,
 };
