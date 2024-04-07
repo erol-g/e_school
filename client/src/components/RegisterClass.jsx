@@ -1,50 +1,35 @@
 import { useState } from "react";
-
+import { toast } from "react-toastify";
 const RegisterClass = () => {
   const [className, setClassName] = useState("");
-  // const [existingClasses, setExistingClasses] = useState([]);
-
-  //   useEffect(() => {
-  //     // Fetch existing classes from the backend when the component mounts
-  //     fetchExistingClasses();
-  //   }, []);
-
-  //   const fetchExistingClasses =async()=>{
-  //     try{
-  //         const response = await fetch("http://localhost:3000/classes")
-  //         const data= await response.json()
-  //         setExistingClasses(data);
-
-  //     }catch(error){
-  //         console.error("Error fetching existing classes:", error);
-
-  //     }
-
-  //   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // if(existingClasses.includes(className)){
-    //     console.error("Class already exists");
-    // }else{
 
-    // }
-    fetch("http://localhost:3000/register-class", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        className: className,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Class created:", data);
-      })
-      .catch((error) => {
-        console.error("Error creating class:", error);
-      });
+    try {
+      const response = await fetch("http://localhost:3000/all-classes");
+      const data = await response.json();
+      const classNames = data.map((item) => item.className);
+
+      if (classNames.includes(className)) {
+        toast.error("Class already exists");
+      } else {
+        await fetch("http://localhost:3000/register-class", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            className: className,
+          }),
+        });
+        toast.success("Class created successfully");
+        console.log("Class created:", className);
+      }
+    } catch (error) {
+      console.error("Error fetching existing classes:", error);
+      toast.error("Failed to create class");
+    }
   };
 
   return (
