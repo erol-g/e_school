@@ -8,11 +8,23 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var loginRouter = require("./routes/index");
 var getDirector = require("./routes/users");
+var getSchoolInfo = require("./routes/users");
+var getStudent = require("./routes/users");
 var addDirector = require("./routes/users");
 var sendTeacher = require("./routes/users");
+var deleteTeacher = require("./routes/users");
 var sendStudent = require("./routes/users");
-
+var getStudentGrade = require("./routes/users");
+var sendMessage = require("./routes/users");
+var getMessage = require("./routes/users");
+var getAllStudents = require("./routes/users")
+var sendClasses = require("./routes/users");
 var createLesson = require("./routes/users");
+var getAllClasses = require("./routes/users");
+var deleteStudent = require("./routes/users")
+var deleteClass = require("./routes/users")
+var getAllTeachers = require("./routes/users")
+
 
 const cors = require("cors");
 
@@ -35,14 +47,28 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/login", loginRouter);
+app.use("/", loginRouter);
 app.use("/", getDirector);
+app.use("/", getSchoolInfo);
+app.use("/", getStudent);
 app.use("/", addDirector);
 app.use("/", sendTeacher);
+app.use("/", deleteTeacher);
 app.use("/", sendStudent);
+app.use("/", sendMessage);
+app.use("/", getMessage);
+app.use("/", getStudentGrade);
+app.use("/", getAllStudents)
+app.use("/", getAllClasses)
+app.use("/", getAllTeachers)
+
 
 //school route //lesson
 app.use("/", createLesson);
+app.use("/", sendClasses);
+
+app.use("/", deleteStudent);
+app.use("/", deleteClass);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
