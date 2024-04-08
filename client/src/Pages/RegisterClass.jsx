@@ -24,10 +24,8 @@ const RegisterClass = () => {
           }),
         });
         toast.success("Class created successfully");
-        console.log("Class created:", className);
       }
     } catch (error) {
-      console.error("Error fetching existing classes:", error);
       toast.error("Failed to create class");
     }
   };
