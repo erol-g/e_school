@@ -46,7 +46,7 @@ router.post("/create-lesson", createLesson);
 router.get("/getPersonelInfo/:id", getPersonelInfoById);
 router.delete("/delete-student/:id", deleteStudent);
 router.delete("/delete-class/:id", deleteClass);
-router.get("/students/:className", getStudentsByClass);
+router.get("/search", getStudentsByClass);
 router.get("/class-list/:userId", getClassList);
 router.post("/sendMessage", sendMessage);
 router.get("/getMessage/:id", getMessage);
