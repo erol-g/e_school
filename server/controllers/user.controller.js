@@ -144,18 +144,18 @@ const getAllStudents =
   ("/all-students",
   async (req, res) => {
     try {
-      const result = await Students.find({}).populate('classId');
+      const result = await Students.find({}).populate("classId");
       res.status(200).json(result);
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
   });
 
-  const getAllTeachers =
+const getAllTeachers =
   ("/all-teachers",
   async (req, res) => {
     try {
-      const result = await Teachers.find({}).populate('classIds');
+      const result = await Teachers.find({}).populate("classIds");
       res.status(200).json(result);
     } catch (error) {
       res.status(500).json({ message: error.message });
@@ -189,6 +189,23 @@ const deleteStudent =
     }
   });
 
+const getClassList = async (req, res) => {
+  try {
+    const userId = req.params?.userId;
+    const personalInfo = await Teachers.find({ _id: userId }).populate(
+      "classIds"
+    );
+    const info = personalInfo[0].classIds;
+
+    res.status(200).json(info);
+  } catch (error) {
+    res.status(404).json({
+      message: "Error retrieving personal messages",
+      error: error.message,
+    });
+  }
+};
+
 
   const getAllTeachers = ("/getAllTeachers",async(req,res) => {
     try {
@@ -210,7 +227,7 @@ const deleteStudent =
     }
   })
 
-module.exports = { getDirector, addDirector, sendTeacher, sendStudent,getAllTeachers,getPersonelInfoById };
+
 module.exports = {
   getDirector,
   addDirector,
@@ -228,4 +245,6 @@ module.exports = {
   deleteTeacher,
   deleteStudent,
   getAllTeachers,
+  getClassList,
+  getPersonelInfoById 
 };

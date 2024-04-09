@@ -9,7 +9,7 @@ const ChangePassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     fetch(
-      `http://127.0.0.1:3000/users/${user.role}/change-password/${user.tokenId}`,
+      `http://127.0.0.1:3000/users/${user.role}/change-password/${user.userId}`,
       {
         method: "PATCH",
         headers: {

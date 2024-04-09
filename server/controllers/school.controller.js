@@ -48,4 +48,9 @@ const getAllClasses =
 
 //students:
 
-module.exports = { createLesson, sendClasses, getAllClasses, deleteClass };
+module.exports = {
+  createLesson,
+  sendClasses,
+  getAllClasses,
+  deleteClass,
+};

@@ -17,7 +17,7 @@ const TeachersPage = () => {
     <div className="page-container">
       <PageHeader title="Teacher Page" />
       <button>to see self information</button>
-      <button>to see class list</button>
+      <button onClick={() => navigate("/class-list")}>to see class list</button>
       <button onClick={() => navigate("/change-password")}>
         to change password
       </button>

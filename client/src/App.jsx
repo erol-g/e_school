@@ -12,6 +12,7 @@ import { ToastContainer } from "react-toastify";
 import RegisterClass from "./Pages/RegisterClass";
 import RegisterStudentPage from "./Pages/RegisterStudentPage";
 import RegisterTeacherPage from "./Pages/RegisterTeacherPage";
+import ClasssListByTeacher from "./Pages/ClassListByTeacher";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/register-class" element={<RegisterClass />}></Route>
         <Route path="/notifications" element={<Notifications />}></Route>
         <Route path="/all-students" element={<AllStudents />}></Route>
+        <Route path="/class-list" element={<ClasssListByTeacher />}></Route>
         <Route
           path="/register-student"
           element={<RegisterStudentPage />}
