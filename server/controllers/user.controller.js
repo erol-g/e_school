@@ -189,6 +189,28 @@ const deleteStudent =
     }
   });
 
+
+  const getAllTeachers = ("/getAllTeachers",async(req,res) => {
+    try {
+      const allTeachers = await Teachers.find({})
+      console.log(allTeachers,"ALL TEACHERS");
+      res.json(allTeachers)
+    } catch (error) {
+      console.log("All teachers could not taken");
+      
+    }
+  })
+
+  const getPersonelInfoById = ("/getPersonelInfo/:id", async(req,res) => {
+    const personelId = req.params.id
+    try {
+      // const findedPersonel = await Teachers.find({})
+    } catch (error) {
+      
+    }
+  })
+
+module.exports = { getDirector, addDirector, sendTeacher, sendStudent,getAllTeachers,getPersonelInfoById };
 module.exports = {
   getDirector,
   addDirector,
