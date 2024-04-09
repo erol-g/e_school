@@ -9,7 +9,7 @@ import ChangePassword from "./Pages/ChangePassword";
 import Notifications from "./Pages/DirectorPages/Notifications";
 import AllStudents from "./Pages/AllStudents";
 import { ToastContainer } from "react-toastify";
-import RegisterClass from "./components/RegisterClass";
+import RegisterClass from "./Pages/RegisterClass";
 import RegisterStudentPage from "./Pages/RegisterStudentPage";
 import RegisterTeacherPage from "./Pages/RegisterTeacherPage";
 import ClasssListByTeacher from "./Pages/ClassListByTeacher";

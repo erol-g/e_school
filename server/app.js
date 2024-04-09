@@ -14,6 +14,8 @@ var addDirector = require("./routes/users");
 var sendTeacher = require("./routes/users");
 var deleteTeacher = require("./routes/users");
 var sendStudent = require("./routes/users");
+var getAllTeachers = require("./routes/users");
+var getPersonelInfoById = require("./routes/users");
 var getStudentGrade = require("./routes/users");
 var sendMessage = require("./routes/users");
 var getMessage = require("./routes/users");
@@ -62,6 +64,10 @@ app.use("/", getAllStudents)
 app.use("/", getAllClasses)
 app.use("/", getAllTeachers)
 
+
+//school route // teachers
+app.use("/", getAllTeachers);
+app.use("/", getPersonelInfoById);
 
 //school route //lesson
 app.use("/", createLesson);
