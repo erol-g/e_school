@@ -207,17 +207,6 @@ const getClassList = async (req, res) => {
 };
 
 
-  const getAllTeachers = ("/getAllTeachers",async(req,res) => {
-    try {
-      const allTeachers = await Teachers.find({})
-      console.log(allTeachers,"ALL TEACHERS");
-      res.json(allTeachers)
-    } catch (error) {
-      console.log("All teachers could not taken");
-      
-    }
-  })
-
   const getPersonelInfoById = ("/getPersonelInfo/:id", async(req,res) => {
     const personelId = req.params.id
     try {
