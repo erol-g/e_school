@@ -83,16 +83,6 @@ const sendStudent =
     res.json(data);
   });
 
-const getStudentsByClass = async (req, res) => {
-  try {
-    const className = req.params.className;
-    const students = await User.find({ className });
-    res.json(students);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
 const updatePassword = async (req, res) => {
   let Model;
   if (req.path.includes("director")) Model = Director;
@@ -205,24 +195,32 @@ const getClassList = async (req, res) => {
     });
   }
 };
+const getStudentsByClass = async (req, res) => {
+  try {
+    const classId = req.query.classId;
+    console.log(typeof classId, classId);
+    const students = await Students.find({ classId: classId });
+    console.log("🚀 ~ getStudentsByClass ~ students:", students);
+    res.json(students);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
-
-  const getPersonelInfoById = ("/getPersonelInfo/:id", async(req,res) => {
-    const personelId = req.params.id
+const getPersonelInfoById =
+  ("/getPersonelInfo/:id",
+  async (req, res) => {
+    const personelId = req.params.id;
     try {
       // const findedPersonel = await Teachers.find({})
-    } catch (error) {
-      
-    }
-  })
-
+    } catch (error) {}
+  });
 
 module.exports = {
   getDirector,
   addDirector,
   sendTeacher,
   sendStudent,
-  getStudentsByClass,
   updatePassword,
   getStudent,
   getStudentGrade,
@@ -235,5 +233,6 @@ module.exports = {
   deleteStudent,
   getAllTeachers,
   getClassList,
-  getPersonelInfoById 
+  getPersonelInfoById,
+  getStudentsByClass,
 };

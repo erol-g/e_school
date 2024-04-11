@@ -65,6 +65,7 @@ const studentsSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Classes",
     },
+
     grades: [
       {
         name: {
@@ -147,6 +148,7 @@ const classesSchema = new Schema({
     type: String,
     required: true,
   },
+  //Bu gereksizse sil.
   studentList: [
     {
       type: Schema.Types.ObjectId,
