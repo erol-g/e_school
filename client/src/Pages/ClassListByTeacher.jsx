@@ -1,7 +1,14 @@
 import { useState, useEffect } from "react";
+import * as React from "react";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const ClasssListByTeacher = () => {
   const [classList, setClassList] = useState([]);
+  const [studentList, setStudentList] = useState({});
+  const [classId, setClassId] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const user = JSON.parse(localStorage.getItem("userInfo"));
 
@@ -23,7 +30,6 @@ const ClasssListByTeacher = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("data: ", data);
         setClassList(data);
         setIsLoading(false);
       } else {
@@ -33,45 +39,69 @@ const ClasssListByTeacher = () => {
       console.error("Error fetching class list:", err);
     }
   };
+
+  const fetchStudentsList = async (classId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/search?classId=${classId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        setStudentList((prevStudentList) => ({
+          ...prevStudentList,
+          [classId]: data,
+        }));
+      } else {
+        console.error("Failed to fetch class list:", response.status);
+      }
+    } catch (err) {
+      console.error("Error fetching class list:", err);
+    }
+  };
+
+  const handleAccordionClick = (individualClass) => {
+    const { _id } = individualClass;
+    setClassId(_id);
+    if (!studentList[_id]) {
+      fetchStudentsList(_id);
+    }
+  };
+
   return (
     <div>
       {isLoading ? (
         <h2>Class list is loading...</h2>
       ) : (
-        <table
-          style={{
-            fontFamily: "arial, sans-serif",
-            borderCollapse: "collapse",
-            width: "100%",
-          }}
-        >
-          <thead>
-            <tr>
-              <th style={{ border: "1px solid #dddddd", padding: "8px" }}>
-                Class Name:
-              </th>
-              {/* Burası ve alttaki satır, öğrenciler classList'e eklendiğinde açılacak. */}
-              {/* <th style={{ border: "1px solid #dddddd", padding: "8px" }}>
-                Student List:
-              </th> */}
-            </tr>
-          </thead>
-          <tbody>
-            {classList.map((individualClass) => (
-              <tr key={individualClass?._id}>
-                <td style={{ border: "1px solid #dddddd", padding: "8px" }}>
-                  {individualClass?.className}
-                </td>
-                {/* Burası ve üstteki satır, öğrenciler classList'e eklendiğinde açılacak. */}
-                {/* <td style={{ border: "1px solid #dddddd", padding: "8px" }}>
-                  {individualClass?.studentList.map((student) => (
-                    <div key={student._id}>{student.name}</div>
-                  ))}
-                </td> */}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div>
+          <h3>Class List:</h3>
+
+          {classList.map((individualClass) => (
+            <Accordion
+              key={individualClass?._id}
+              onClick={() => handleAccordionClick(individualClass)}
+            >
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1-content"
+                id="panel1-header"
+              >
+                {individualClass?.className}
+              </AccordionSummary>
+              <AccordionDetails>
+                {studentList[classId]?.map((student) => (
+                  <div key={student._id}>{student.name}</div>
+                ))}
+              </AccordionDetails>
+            </Accordion>
+          ))}
+        </div>
       )}
     </div>
   );
