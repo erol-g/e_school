@@ -16,7 +16,7 @@ const lessonSchema = new Schema({
   },
   className: {
     type: Schema.Types.ObjectId,
-    ref: "ClassName", // Reference to class
+    ref: "Classes", // Reference to class
     required: true,
   },
   date: {

@@ -24,13 +24,13 @@ const getSchoolInfo =
 
 //Student
 
-const getStudent =
-  ("/getStudent",
-  async (req, res) => {
-    const result = await Students.find({});
+// const getStudent =
+//   ("/getStudent",
+//   async (req, res) => {
+//     const result = await Students.find({});
 
-    res.json(result);
-  });
+//     res.json(result);
+//   });
 
 const getStudentGrade =
   ("/getGrade/:id",
@@ -222,7 +222,7 @@ module.exports = {
   sendTeacher,
   sendStudent,
   updatePassword,
-  getStudent,
+  // getStudent,
   getStudentGrade,
   sendMessage,
   getMessage,

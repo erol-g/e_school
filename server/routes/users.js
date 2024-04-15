@@ -2,7 +2,7 @@ var express = require("express");
 const {
   getDirector,
   addDirector,
-  getStudent,
+  // getStudent,
   sendTeacher,
   deleteTeacher,
   sendStudent,
@@ -50,7 +50,7 @@ router.get("/search", getStudentsByClass);
 router.get("/class-list/:userId", getClassList);
 router.post("/sendMessage", sendMessage);
 router.get("/getMessage/:id", getMessage);
-router.get("/getStudent", getStudent);
+// router.get("/getStudent", getStudent);
 router.get("/getGrade/:id", getStudentGrade);
 router.get("/all-students", getAllStudents);
 router.post("/register-class", sendClasses);
