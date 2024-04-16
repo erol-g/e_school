@@ -237,7 +237,7 @@ const schoolInformation = ("/school-information", async (req, res) => {
 
   } catch (error) {
     res.status(404).json({
-      message: "Error retrieving general school infos",
+      message: "Error retrieving general school info",
       error: error.message,
     });
   }
