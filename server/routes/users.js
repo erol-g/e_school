@@ -18,6 +18,7 @@ const {
   getAllStudents,
   passwordControl,
   getClassList,
+  schoolInformation
 } = require("../controllers/user.controller");
 
 const {
@@ -26,6 +27,7 @@ const {
   getAllClasses,
   deleteClass,
   getClassesByTeacher,
+
 } = require("../controllers/school.controller");
 const { passControl } = require("../middlewares");
 
@@ -57,6 +59,7 @@ router.post("/register-class", sendClasses);
 router.post("/login", [passControl], passwordControl);
 router.get("/all-classes", getAllClasses);
 router.get("/all-teachers", getAllTeachers);
+router.get("/school-information", schoolInformation);
 
 /* Update password */
 router.patch("/director/change-password/:id", updatePassword);
