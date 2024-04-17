@@ -2,7 +2,6 @@ var express = require("express");
 const {
   getDirector,
   addDirector,
-  // getStudent,
   sendTeacher,
   deleteTeacher,
   sendStudent,
@@ -25,7 +24,7 @@ const {
   createLesson,
   sendClasses,
   getAllClasses,
-  deleteClass,
+  // deleteClass,
   getClassesByTeacher,
 
 } = require("../controllers/school.controller");
@@ -47,12 +46,11 @@ router.post("/register-student", sendStudent);
 router.post("/create-lesson", createLesson);
 router.get("/getPersonelInfo/:id", getPersonelInfoById);
 router.delete("/delete-student/:id", deleteStudent);
-router.delete("/delete-class/:id", deleteClass);
+// router.delete("/delete-class/:id", deleteClass);
 router.get("/search", getStudentsByClass);
 router.get("/class-list/:userId", getClassList);
 router.post("/sendMessage", sendMessage);
 router.get("/getMessage/:id", getMessage);
-// router.get("/getStudent", getStudent);
 router.get("/getGrade/:id", getStudentGrade);
 router.get("/all-students", getAllStudents);
 router.post("/register-class", sendClasses);

@@ -26,14 +26,6 @@ const getSchoolInfo =
 
 //Student
 
-// const getStudent =
-//   ("/getStudent",
-//   async (req, res) => {
-//     const result = await Students.find({});
-
-//     res.json(result);
-//   });
-
 const getStudentGrade =
   ("/getGrade/:id",
     async (req, res) => {
@@ -103,9 +95,9 @@ const sendMessage = async (req, res) => {
   try {
     const { senderId, recipientId, content, senderName } = req.body;
     const message = new Message({
-      sender: senderId,
-      senderName: senderName,
-      recipient: recipientId,
+      senderId,
+      senderName,
+      recipientId,
       content,
     });
     await message.save();
@@ -200,9 +192,7 @@ const getClassList = async (req, res) => {
 const getStudentsByClass = async (req, res) => {
   try {
     const classId = req.query.classId;
-    console.log(typeof classId, classId);
     const students = await Students.find({ classId: classId });
-    console.log("🚀 ~ getStudentsByClass ~ students:", students);
     res.json(students);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -252,7 +242,6 @@ module.exports = {
   sendTeacher,
   sendStudent,
   updatePassword,
-  // getStudent,
   getStudentGrade,
   sendMessage,
   getMessage,
