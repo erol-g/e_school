@@ -12,7 +12,7 @@ const StudentsGradeInfo = () => {
     
       const fetchStudentsGrade = async () => {
         try {
-          const response = await fetch("http://localhost:3000//getGrade/:id", {
+          const response = await fetch("http://localhost:3000/getGrade/:id", {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
