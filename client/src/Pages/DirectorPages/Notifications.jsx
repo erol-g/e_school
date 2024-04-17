@@ -7,16 +7,11 @@ const NotificationsTable = () => {
   const [notifications, setNotifications] = useState([]);
   const [open, setOpen] = useState(false);
   const [selectedNotification, setSelectedNotification] = useState(null);
-  console.log(
-    "🚀 ~ NotificationsTable ~ selectedNotification:",
-    selectedNotification
-  );
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   const userId = userInfo ? userInfo.userId : null;
 
   const columns = [
     { field: "senderName", headerName: "Sender name", width: 130 },
-
     {
       field: "content",
       headerName: "Content",

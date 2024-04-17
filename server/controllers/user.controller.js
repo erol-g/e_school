@@ -209,7 +209,7 @@ const getStudentsByClass = async (req, res) => {
 };
 
 const getPersonelInfoById = async (req, res) => {
-  console.log("debnem");
+  console.log("deneme");
   const userId = req.params.id;
   const role = req.params.role;
   let Model;

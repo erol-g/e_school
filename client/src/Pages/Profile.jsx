@@ -17,7 +17,6 @@ const Profile = () => {
         }
         const data = await response.json();
         setProfileInfo(data.data[0]);
-        console.log("🚀 ~ fetchProfileInfo ~ data:", data.data);
       } catch (error) {
         console.error("Error fetching notifications:", error);
       }

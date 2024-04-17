@@ -12,7 +12,9 @@ const StudentsPage = () => {
       <button>to see your notes</button>
       <button onClick={() => navigate("/profile")}>to see your personal information</button>
       <button>to send a message</button>
-      <button>to read your message</button>
+      <button onClick={() => navigate("/notifications")}>
+        to read your message
+      </button>
     </div>
   );
 };
