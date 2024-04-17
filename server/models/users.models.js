@@ -136,8 +136,8 @@ const lessonsSchema = new Schema(
 );
 
 const messageSchema = new Schema({
-  sender: { type: Schema.Types.ObjectId, ref: "User", required: true },
-  recipient: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  senderId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  recipientId: { type: Schema.Types.ObjectId, ref: "User", required: true },
   content: { type: String, required: true },
   senderName: { type: String },
   createdAt: { type: Date, default: Date.now },
@@ -148,7 +148,6 @@ const classesSchema = new Schema({
     type: String,
     required: true,
   },
-  //Bu gereksizse sil.
   studentList: [
     {
       type: Schema.Types.ObjectId,

@@ -35,8 +35,7 @@ const RegisterStudentPage = () => {
       }),
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+      .then(() => {
         toast.success("Student registered successfully!"); 
         setEmail("");
         setPassword("");

@@ -7,22 +7,22 @@ const createLesson =
     res.json(req.body);
   });
 
-const deleteClass =
-  ("/delete-class/:id",
-  async (req, res) => {
-    try {
-      const { id } = req.params;
-      const result = await Lessons.findByIdAndDelete(id);
+// const deleteClass =
+//   ("/delete-class/:id",
+//   async (req, res) => {
+//     try {
+//       const { id } = req.params;
+//       const result = await Lessons.findByIdAndDelete(id);
 
-      if (!result) {
-        return res.status(404).json({ message: "Class not found" });
-      }
-      return res.status(200).send({ message: "Class deleted succesfully" });
-    } catch (error) {
-      console.log(error.message);
-      res.status(500).send({ message: error.message });
-    }
-  });
+//       if (!result) {
+//         return res.status(404).json({ message: "Class not found" });
+//       }
+//       return res.status(200).send({ message: "Class deleted succesfully" });
+//     } catch (error) {
+//       console.log(error.message);
+//       res.status(500).send({ message: error.message });
+//     }
+//   });
 
 const sendClasses =
   ("/register-class",
@@ -52,5 +52,5 @@ module.exports = {
   createLesson,
   sendClasses,
   getAllClasses,
-  deleteClass,
+  // deleteClass,
 };
