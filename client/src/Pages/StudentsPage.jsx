@@ -10,7 +10,7 @@ const StudentsPage = () => {
         to change your password
       </button>
       <button>to see your notes</button>
-      <button>to see your information</button>
+      <button onClick={() => navigate("/profile")}>to see your personal information</button>
       <button>to send a message</button>
       <button>to read your message</button>
     </div>

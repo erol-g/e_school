@@ -13,6 +13,7 @@ import RegisterClass from "./Pages/RegisterClass";
 import RegisterStudentPage from "./Pages/RegisterStudentPage";
 import RegisterTeacherPage from "./Pages/RegisterTeacherPage";
 import ClasssListByTeacher from "./Pages/ClassListByTeacher";
+import Profile from "./Pages/Profile";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           path="/register-teacher"
           element={<RegisterTeacherPage />}
         ></Route>
+        <Route path="/profile" element={<Profile/>}/>
       </Routes>
     </>
   );

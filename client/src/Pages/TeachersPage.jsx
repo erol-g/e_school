@@ -16,7 +16,6 @@ const TeachersPage = () => {
   return (
     <div className="page-container">
       <PageHeader title="Teacher Page" />
-      <button>to see self information</button>
       <button onClick={() => navigate("/class-list")}>to see class list</button>
       <button onClick={() => navigate("/change-password")}>
         to change password
@@ -24,7 +23,7 @@ const TeachersPage = () => {
       <button>to grade</button>
       <button>to send a message</button>
       <button>to read your message</button>
-      <button>to see your personal information</button>
+      <button onClick={() => navigate("/profile")}>to see your personal information</button>
     </div>
   );
 };

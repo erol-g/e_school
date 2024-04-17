@@ -45,7 +45,7 @@ router.post("/addDirector", addDirector);
 router.post("/register-teacher", sendTeacher);
 router.post("/register-student", sendStudent);
 router.post("/create-lesson", createLesson);
-router.get("/getPersonelInfo/:id", getPersonelInfoById);
+router.get("/getPersonelInfo/:role/:id", getPersonelInfoById);
 router.delete("/delete-student/:id", deleteStudent);
 router.delete("/delete-class/:id", deleteClass);
 router.get("/search", getStudentsByClass);
