@@ -16,14 +16,16 @@ const TeachersPage = () => {
   return (
     <div className="page-container">
       <PageHeader title="Teacher Page" />
-      <button>to see self information</button>
       <button onClick={() => navigate("/class-list")}>to see class list</button>
+      <button>to grade</button>
       <button onClick={() => navigate("/change-password")}>
         to change password
       </button>
       <button onClick={() => navigate("/grade")}>to grade</button>
       <button>to send a message</button>
-      <button>to read your message</button>
+      <button onClick={() => navigate("/notifications")}>
+        to read your message
+      </button>
       <button>to see your personal information</button>
     </div>
   );

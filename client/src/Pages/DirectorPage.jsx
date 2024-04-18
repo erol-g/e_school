@@ -21,10 +21,10 @@ const DirectorPage = () => {
       </button>
 
       <button>to see student grade information</button>
+      <button onClick={()=> navigate("/school-information")}>to see general information of the school</button>
       <button onClick={() => navigate("/change-password")}>
         to change password
       </button>
-      <button>to see general information of the school</button>
       <button>to send a message</button>
       <button onClick={() => navigate("/notifications")}>
         to read your message

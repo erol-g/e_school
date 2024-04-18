@@ -9,7 +9,6 @@ var usersRouter = require("./routes/users");
 var loginRouter = require("./routes/index");
 var getDirector = require("./routes/users");
 var getSchoolInfo = require("./routes/users");
-// var getStudent = require("./routes/users");
 var addDirector = require("./routes/users");
 var sendTeacher = require("./routes/users");
 var deleteTeacher = require("./routes/users");
@@ -24,7 +23,7 @@ var sendClasses = require("./routes/users");
 var createLesson = require("./routes/users");
 var getAllClasses = require("./routes/users");
 var deleteStudent = require("./routes/users");
-var deleteClass = require("./routes/users");
+// var deleteClass = require("./routes/users");
 var getAllTeachers = require("./routes/users");
 var getStudentsByClass = require("./routes/users");
 var schoolInformation = require("./routes/users");
@@ -55,7 +54,6 @@ app.use("/users", usersRouter);
 app.use("/", loginRouter);
 app.use("/", getDirector);
 app.use("/", getSchoolInfo);
-// app.use("/", getStudent);
 app.use("/", addDirector);
 app.use("/", sendTeacher);
 app.use("/", deleteTeacher);
@@ -79,7 +77,7 @@ app.use("/", createLesson);
 app.use("/", sendClasses);
 
 app.use("/", deleteStudent);
-app.use("/", deleteClass);
+// app.use("/", deleteClass);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
