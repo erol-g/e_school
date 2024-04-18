@@ -21,6 +21,7 @@ const TeachersPage = () => {
       <button onClick={() => navigate("/change-password")}>
         to change password
       </button>
+      <button onClick={() => navigate("/grade")}>to grade</button>
       <button>to send a message</button>
       <button onClick={() => navigate("/notifications")}>
         to read your message

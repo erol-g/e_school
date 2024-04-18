@@ -14,17 +14,16 @@ const lessonSchema = new Schema({
     type: String,
     required: true,
   },
+  name: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+
   className: {
     type: Schema.Types.ObjectId,
     ref: "Classes", // Reference to class
     required: true,
-  },
-  date: {
-    type: Date,
-    required: true,
-  },
-  description: {
-    type: String,
   },
 });
 
