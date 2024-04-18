@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router";
 import PageHeader from "./HeaderPage";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +8,7 @@ const StudentsPage = () => {
   return (
     <div className="page-container">
       <PageHeader title="Student Page" />
-      <button onClick={() => navigate ('/grades')}>to see your notes</button>
+      <button onClick={() => navigate ('/see-grades')}>to see your notes</button>
       <button onClick={() => navigate("/change-password")}>
         to change your password
       </button>
