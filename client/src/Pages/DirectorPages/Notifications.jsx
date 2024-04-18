@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
-import { DataGrid } from '@mui/x-data-grid';
-import { Button, Modal, Box, Typography  } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
+import { Button, Modal, Box, Typography } from "@mui/material";
 import "./notifications.css";
 
 const NotificationsTable = () => {
   const [notifications, setNotifications] = useState([]);
   const [open, setOpen] = useState(false);
   const [selectedNotification, setSelectedNotification] = useState(null);
-  console.log("🚀 ~ NotificationsTable ~ selectedNotification:", selectedNotification)
+ 
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  const tokenId = userInfo ? userInfo.tokenId : null;
+  const userId = userInfo ? userInfo.userId : null;
 
   const columns = [
     { field: "senderName", headerName: "Sender name", width: 130 },
@@ -28,7 +28,7 @@ const NotificationsTable = () => {
     setSelectedNotification(notification); // Store selected notification data
     setOpen(true);
   };
-  
+
   const handleCloseModal = () => {
     setOpen(false);
   };
@@ -37,7 +37,7 @@ const NotificationsTable = () => {
     const fetchNotifications = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/getMessage/${tokenId}`
+          `http://localhost:3000/getMessage/${userId}`
         );
         if (!response.ok) {
           throw new Error(`Error fetching notifications: ${response.status}`);
@@ -50,7 +50,7 @@ const NotificationsTable = () => {
     };
 
     fetchNotifications();
-  }, [tokenId]);
+  }, [userId]);
 
   return (
     <div>
@@ -67,7 +67,7 @@ const NotificationsTable = () => {
               paginationModel: { page: 0, pageSize: 5 },
             },
           }}
-          pageSizeOptions={[5, 10,25]}
+          pageSizeOptions={[5, 10, 25]}
           checkboxSelection
         />
       </div>
@@ -78,7 +78,18 @@ const NotificationsTable = () => {
         aria-labelledby="modal-title"
         aria-describedby="modal-description"
       >
-        <Box sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: 400, bgcolor: "background.paper", boxShadow: 24, p: 4 }}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 400,
+            bgcolor: "background.paper",
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
           <Typography id="modal-title" variant="h6" component="h2">
             Message Content
           </Typography>

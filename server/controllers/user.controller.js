@@ -4,6 +4,9 @@ const {
   Students,
   SchoolInfo,
   Message,
+  Lessons,
+  Classes,
+  Grades,
 } = require("../models/users.models.js");
 
 const getDirector =
@@ -24,21 +27,54 @@ const getSchoolInfo =
 
 //Student
 
-const getStudent =
-  ("/getStudent",
-  async (req, res) => {
-    const result = await Students.find({});
-
-    res.json(result);
-  });
-
 const getStudentGrade =
   ("/getGrade/:id",
   async (req, res) => {
-    const result = await Students.findById(req.params.id);
-    const grades = result.grades;
-    res.json(grades);
+    try {
+      const result = await Grades.find({ studentId: req.params.id }).populate(
+        "studentId"
+      );
+      res.json(result);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ error: "An error occurred while fetching student grades" });
+    }
   });
+
+const getGrades =
+  ("/getGrades",
+  async (req, res) => {
+    try {
+      const result = await Grades.find({});
+      res.json(result);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ error: "An error occurred while fetching grades" });
+    }
+  });
+
+const addGrade =
+  ("/add-grade",
+  async (req, res) => {
+    try {
+      const data = await Grades.create(req.body);
+      res.json(data);
+    } catch (error) {
+      res.status(500).json({ error: "An error occurred while posting grades" });
+    }
+  });
+// const addGrade =
+//   ("/add-grade",
+//   async (req, res) => {
+//     try {
+//       const data = await Grades.insertMany(req.body);
+//       res.json(data);
+//     } catch (error) {
+//       res.status(500).json({ error: "An error occurred while posting grades" });
+//     }
+//   });
 
 const deleteTeacher =
   ("/remove-teacher",
@@ -68,6 +104,7 @@ const addDirector =
 const sendTeacher =
   ("/register-teacher",
   async (req, res) => {
+    req.body.role = "teacher";
     const data = await Teachers.create(req.body);
 
     res.json(data);
@@ -81,16 +118,6 @@ const sendStudent =
 
     res.json(data);
   });
-
-const getStudentsByClass = async (req, res) => {
-  try {
-    const className = req.params.className;
-    const students = await User.find({ className });
-    res.json(students);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
 
 const updatePassword = async (req, res) => {
   let Model;
@@ -110,9 +137,9 @@ const sendMessage = async (req, res) => {
   try {
     const { senderId, recipientId, content, senderName } = req.body;
     const message = new Message({
-      sender: senderId,
-      senderName: senderName,
-      recipient: recipientId,
+      senderId,
+      senderName,
+      recipientId,
       content,
     });
     await message.save();
@@ -143,7 +170,18 @@ const getAllStudents =
   ("/all-students",
   async (req, res) => {
     try {
-      const result = await Students.find({});
+      const result = await Students.find({}).populate("classId");
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+const getAllTeachers =
+  ("/all-teachers",
+  async (req, res) => {
+    try {
+      const result = await Teachers.find({}).populate("classIds");
       res.status(200).json(result);
     } catch (error) {
       res.status(500).json({ message: error.message });
@@ -151,13 +189,20 @@ const getAllStudents =
   });
 
 const passwordControl = (req, res) => {
-  res.status(200).json({
+  const responseObject = {
     status: true,
     message: "success",
     role: req.role,
     id: req.id,
     name: req.name,
-  });
+  };
+
+  // If the user is a teacher, include the subject in the response
+  if (req.role === "teacher") {
+    responseObject.subject = req.subject;
+  }
+
+  res.status(200).json(responseObject);
 };
 
 const deleteStudent =
@@ -177,14 +222,73 @@ const deleteStudent =
     }
   });
 
+const getClassList = async (req, res) => {
+  try {
+    const userId = req.params?.userId;
+    const personalInfo = await Teachers.find({ _id: userId }).populate(
+      "classIds"
+    );
+    const info = personalInfo[0].classIds;
+
+    res.status(200).json(info);
+  } catch (error) {
+    res.status(404).json({
+      message: "Error retrieving personal messages",
+      error: error.message,
+    });
+  }
+};
+const getStudentsByClass = async (req, res) => {
+  try {
+    const classId = req.query.classId;
+    const students = await Students.find({ classId: classId });
+    res.json(students);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getPersonelInfoById =
+  ("/getPersonelInfo/:id",
+  async (req, res) => {
+    const personelId = req.params.id;
+    try {
+      // const findedPersonel = await Teachers.find({})
+    } catch (error) {}
+  });
+
+const schoolInformation =
+  ("/school-information",
+  async (req, res) => {
+    try {
+      const students = await Students.countDocuments();
+      const teachers = await Teachers.countDocuments();
+      const directors = await Director.countDocuments();
+      const schoolInfo = await SchoolInfo.find({});
+      const lessons = await Lessons.countDocuments();
+      const classes = await Classes.countDocuments();
+      res.json({
+        students,
+        directors,
+        teachers,
+        schoolInfo,
+        lessons,
+        classes,
+      });
+    } catch (error) {
+      res.status(404).json({
+        message: "Error retrieving general school info",
+        error: error.message,
+      });
+    }
+  });
+
 module.exports = {
   getDirector,
   addDirector,
   sendTeacher,
   sendStudent,
-  getStudentsByClass,
   updatePassword,
-  getStudent,
   getStudentGrade,
   sendMessage,
   getMessage,
@@ -193,4 +297,11 @@ module.exports = {
   getSchoolInfo,
   deleteTeacher,
   deleteStudent,
+  getAllTeachers,
+  getClassList,
+  getPersonelInfoById,
+  getStudentsByClass,
+  schoolInformation,
+  addGrade,
+  getGrades,
 };

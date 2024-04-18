@@ -5,3 +5,4 @@ const { deleteLesson } = require("../controllers/lesson.controller.js");
 router.delete("lessons/:id", deleteLesson);
 
 module.exports = router;
+//burasi kullanilmiyor, kontrol edilip silinmeli
