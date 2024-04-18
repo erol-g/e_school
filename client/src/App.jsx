@@ -8,6 +8,7 @@ import StudentsPage from "./Pages/StudentsPage";
 import Notifications from "./Pages/DirectorPages/Notifications";
 import AllStudents from "./Pages/AllStudents";
 import RegisterStudentPage from "./Pages/RegisterStudentPage";
+import SeeGrades from "./Pages/SeeGrades";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           path="/register-student"
           element={<RegisterStudentPage />}
         ></Route>
+        <Route path="/grades" element={<SeeGrades/>}></Route>
       </Routes>
     </>
   );
