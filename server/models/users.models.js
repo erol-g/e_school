@@ -81,9 +81,11 @@ const teachersSchema = new Schema(
     email: {
       type: String,
       unique: true,
+      required:true
     },
     password: {
       type: Number,
+      required:true
     },
     address: {
       type: String,
@@ -127,7 +129,6 @@ const lessonsSchema = new Schema(
 );
 
 const messageSchema = new Schema({
-  senderId: { type: Schema.Types.ObjectId, ref: "User", required: true },
   recipientEmail: { type: "string", required: true },
   senderEmail:{ type:"string", required: true},
   content: { type: String, required: true },
@@ -138,6 +139,7 @@ const classesSchema = new Schema({
   className: {
     type: String,
     required: true,
+    unique:true,
   },
   studentList: [
     {

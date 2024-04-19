@@ -100,14 +100,15 @@ const addDirector =
     res.json(data);
   });
 
-const sendTeacher =
-  ("/register-teacher",
-  async (req, res) => {
-    req.body.role = "teacher";
-    const data = await Teachers.create(req.body);
-
-    res.json(data);
-  });
+  const sendTeacher = async (req, res) => {
+    try {
+      req.body.role = "teacher";
+      const data = await Teachers.create(req.body);
+      res.json(data);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
 
 const sendStudent =
   ("/register-student",
@@ -136,7 +137,6 @@ const sendMessage = async (req, res) => {
   try {
     const { senderEmail, senderId, recipientEmail, content } = req.body;
     const message = new Message({
-      senderId,
       senderEmail,
       recipientEmail,
       content,
