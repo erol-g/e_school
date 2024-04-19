@@ -15,6 +15,7 @@ import RegisterTeacherPage from "./Pages/RegisterTeacherPage";
 import ClasssListByTeacher from "./Pages/ClassListByTeacher";
 import Grade from "./Pages/Grade";
 import GeneralInformation from "./Pages/GeneralInformation";
+import SendMessage from "./Pages/SendMessage";
 
 
 function App() {
@@ -44,6 +45,10 @@ function App() {
          <Route
           path="/school-information"
           element={<GeneralInformation />}
+        ></Route>
+         <Route
+          path="/send-message"
+          element={<SendMessage />}
         ></Route>
       </Routes>
     </>
