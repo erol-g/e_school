@@ -22,6 +22,7 @@ const passControl = async (req, res, next) => {
     req.role = foundUser.role; //burada istedigimiz veriyi bir sonraki asamada alabiliyoruz.
     req.id = foundUser.id;
     req.name = foundUser.name;
+    req.email = foundUser.email
     
        if (req.role == "teacher") {
         req.subject = foundUser.subject;

@@ -128,9 +128,9 @@ const lessonsSchema = new Schema(
 
 const messageSchema = new Schema({
   senderId: { type: Schema.Types.ObjectId, ref: "User", required: true },
-  recipientId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  recipientEmail: { type: "string", required: true },
+  senderEmail:{ type:"string", required: true},
   content: { type: String, required: true },
-  senderName: { type: String },
   createdAt: { type: Date, default: Date.now },
 });
 

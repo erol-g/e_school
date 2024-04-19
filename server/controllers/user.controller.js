@@ -81,7 +81,7 @@ const deleteTeacher =
   async (req, res) => {
     try {
       const deletedTeacher = await Teachers.findByIdAndDelete(req.params.id);
-      if (!deletedTeachers) {
+      if (!deletedTeacher) {
         return res
           .status(404)
           .json({ error: `Teacher with ID ${deletedTeacher} not found` });
@@ -135,11 +135,11 @@ const updatePassword = async (req, res) => {
 
 const sendMessage = async (req, res) => {
   try {
-    const { senderId, recipientId, content, senderName } = req.body;
+    const { senderEmail, senderId, recipientEmail, content } = req.body;
     const message = new Message({
       senderId,
-      senderName,
-      recipientId,
+      senderEmail,
+      recipientEmail,
       content,
     });
     await message.save();
@@ -155,8 +155,8 @@ const sendMessage = async (req, res) => {
 
 const getMessage = async (req, res) => {
   try {
-    const recipientId = req.params.id;
-    const messages = await Message.find({ recipient: recipientId });
+    const recipientEmail = req.params.email;
+    const messages = await Message.find({ recipientEmail: recipientEmail });
     res.status(200).json({ messages: messages });
   } catch (error) {
     res
@@ -195,6 +195,7 @@ const passwordControl = (req, res) => {
     role: req.role,
     id: req.id,
     name: req.name,
+    email: req.email
   };
 
   // If the user is a teacher, include the subject in the response
