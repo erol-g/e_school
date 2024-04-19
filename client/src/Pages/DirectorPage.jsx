@@ -25,7 +25,7 @@ const DirectorPage = () => {
       <button onClick={() => navigate("/change-password")}>
         to change password
       </button>
-      <button>to send a message</button>
+      <button onClick={() => navigate("/send-message")} >to send a message</button>
       <button onClick={() => navigate("/notifications")}>
         to read your message
       </button>

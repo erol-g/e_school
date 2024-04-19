@@ -17,7 +17,9 @@ const {
   getAllStudents,
   passwordControl,
   getClassList,
-  schoolInformation
+  schoolInformation,
+  addGrade,
+  getGrades,
 } = require("../controllers/user.controller");
 
 const {
@@ -26,7 +28,6 @@ const {
   getAllClasses,
   // deleteClass,
   getClassesByTeacher,
-
 } = require("../controllers/school.controller");
 const { passControl } = require("../middlewares");
 
@@ -44,13 +45,15 @@ router.post("/addDirector", addDirector);
 router.post("/register-teacher", sendTeacher);
 router.post("/register-student", sendStudent);
 router.post("/create-lesson", createLesson);
+router.post("/add-grade", addGrade);
+router.get("/getGrades", getGrades);
 router.get("/getPersonelInfo/:id", getPersonelInfoById);
 router.delete("/delete-student/:id", deleteStudent);
 // router.delete("/delete-class/:id", deleteClass);
 router.get("/search", getStudentsByClass);
 router.get("/class-list/:userId", getClassList);
 router.post("/sendMessage", sendMessage);
-router.get("/getMessage/:id", getMessage);
+router.get("/getMessage/:email", getMessage);
 router.get("/getGrade/:id", getStudentGrade);
 router.get("/all-students", getAllStudents);
 router.post("/register-class", sendClasses);
@@ -63,6 +66,5 @@ router.get("/school-information", schoolInformation);
 router.patch("/director/change-password/:id", updatePassword);
 router.patch("/teacher/change-password/:id", updatePassword);
 router.patch("/student/change-password/:id", updatePassword);
-
 
 module.exports = router;

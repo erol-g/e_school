@@ -14,7 +14,10 @@ import RegisterClass from "./Pages/RegisterClass";
 import RegisterStudentPage from "./Pages/RegisterStudentPage";
 import RegisterTeacherPage from "./Pages/RegisterTeacherPage";
 import ClasssListByTeacher from "./Pages/ClassListByTeacher";
+import Grade from "./Pages/Grade";
 import GeneralInformation from "./Pages/GeneralInformation";
+import SendMessage from "./Pages/SendMessage";
+
 
 function App() {
   return (
@@ -31,6 +34,7 @@ function App() {
         <Route path="/notifications" element={<Notifications />}></Route>
         <Route path="/all-students" element={<AllStudents />}></Route>
         <Route path="/class-list" element={<ClasssListByTeacher />}></Route>
+        <Route path="/grade" element={<Grade />}></Route>
         <Route
           path="/register-student"
           element={<RegisterStudentPage />}
@@ -46,6 +50,10 @@ function App() {
          <Route
           path="/school-information"
           element={<GeneralInformation />}
+        ></Route>
+         <Route
+          path="/send-message"
+          element={<SendMessage />}
         ></Route>
       </Routes>
     </>
