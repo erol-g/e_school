@@ -2,7 +2,6 @@ var express = require("express");
 const {
   getDirector,
   addDirector,
-  // getStudent,
   sendTeacher,
   deleteTeacher,
   sendStudent,
@@ -18,16 +17,17 @@ const {
   getAllStudents,
   passwordControl,
   getClassList,
-  schoolInformation
+  schoolInformation,
+  addGrade,
+  getGrades,
 } = require("../controllers/user.controller");
 
 const {
   createLesson,
   sendClasses,
   getAllClasses,
-  deleteClass,
+  // deleteClass,
   getClassesByTeacher,
-
 } = require("../controllers/school.controller");
 const { passControl } = require("../middlewares");
 
@@ -46,13 +46,15 @@ router.post("/register-teacher", sendTeacher);
 router.post("/register-student", sendStudent);
 router.post("/create-lesson", createLesson);
 router.get("/getPersonelInfo/:role/:id", getPersonelInfoById);
+router.post("/add-grade", addGrade);
+router.get("/getGrades", getGrades);
+router.get("/getPersonelInfo/:id", getPersonelInfoById);
 router.delete("/delete-student/:id", deleteStudent);
-router.delete("/delete-class/:id", deleteClass);
+// router.delete("/delete-class/:id", deleteClass);
 router.get("/search", getStudentsByClass);
 router.get("/class-list/:userId", getClassList);
 router.post("/sendMessage", sendMessage);
-router.get("/getMessage/:id", getMessage);
-// router.get("/getStudent", getStudent);
+router.get("/getMessage/:email", getMessage);
 router.get("/getGrade/:id", getStudentGrade);
 router.get("/all-students", getAllStudents);
 router.post("/register-class", sendClasses);
@@ -65,6 +67,5 @@ router.get("/school-information", schoolInformation);
 router.patch("/director/change-password/:id", updatePassword);
 router.patch("/teacher/change-password/:id", updatePassword);
 router.patch("/student/change-password/:id", updatePassword);
-
 
 module.exports = router;

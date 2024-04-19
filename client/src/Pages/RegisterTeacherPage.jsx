@@ -43,8 +43,7 @@ const RegisterTeacherPage = () => {
       }),
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+      .then(() => {
         toast.success("teacher registered successfully!"); 
         setEmail("");
         setPassword("");

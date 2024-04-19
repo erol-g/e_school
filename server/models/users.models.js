@@ -65,19 +65,6 @@ const studentsSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Classes",
     },
-
-    grades: [
-      {
-        name: {
-          type: String,
-          required: true,
-        },
-        result: {
-          type: Number,
-          required: true,
-        },
-      },
-    ],
   },
   {
     collection: "students",
@@ -103,6 +90,10 @@ const teachersSchema = new Schema(
     },
     role: {
       type: String,
+    },
+    subject: {
+      type: String, // Assuming the subject name is stored as a string
+      required: true,
     },
     classIds: [
       {
@@ -136,10 +127,10 @@ const lessonsSchema = new Schema(
 );
 
 const messageSchema = new Schema({
-  sender: { type: Schema.Types.ObjectId, ref: "User", required: true },
-  recipient: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  senderId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  recipientEmail: { type: "string", required: true },
+  senderEmail:{ type:"string", required: true},
   content: { type: String, required: true },
-  senderName: { type: String },
   createdAt: { type: Date, default: Date.now },
 });
 
@@ -148,13 +139,26 @@ const classesSchema = new Schema({
     type: String,
     required: true,
   },
-  //Bu gereksizse sil.
   studentList: [
     {
       type: Schema.Types.ObjectId,
       ref: "Students",
     },
   ],
+});
+
+const gradeSchema = new Schema({
+  studentId: {
+    type: Schema.Types.ObjectId,
+    ref: "Students",
+  },
+  gradeName: {
+    type: String,
+    required: true,
+  },
+  result: {
+    type: Number,
+  },
 });
 
 const Director = model("Directors", directorSchema);
@@ -164,6 +168,7 @@ const Lessons = model("Lessons", lessonsSchema);
 const SchoolInfo = model("SchoolInfo", schoolInfoSchema);
 const Message = model("Message", messageSchema);
 const Classes = model("Classes", classesSchema);
+const Grades = model("Grades", gradeSchema);
 
 module.exports = {
   Director,
@@ -173,4 +178,5 @@ module.exports = {
   SchoolInfo,
   Classes,
   Message,
+  Grades,
 };

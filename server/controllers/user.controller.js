@@ -6,6 +6,7 @@ const {
   Message,
   Lessons,
   Classes,
+  Grades,
 } = require("../models/users.models.js");
 
 const getDirector =
@@ -25,28 +26,61 @@ const getSchoolInfo =
 
 //Student
 
-// const getStudent =
-//   ("/getStudent",
-//   async (req, res) => {
-//     const result = await Students.find({});
-
-//     res.json(result);
-//   });
-
 const getStudentGrade =
   ("/getGrade/:id",
   async (req, res) => {
-    const result = await Students.findById(req.params.id);
-    const grades = result.grades;
-    res.json(grades);
+    try {
+      const result = await Grades.find({ studentId: req.params.id }).populate(
+        "studentId"
+      );
+      res.json(result);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ error: "An error occurred while fetching student grades" });
+    }
   });
+
+const getGrades =
+  ("/getGrades",
+  async (req, res) => {
+    try {
+      const result = await Grades.find({});
+      res.json(result);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ error: "An error occurred while fetching grades" });
+    }
+  });
+
+const addGrade =
+  ("/add-grade",
+  async (req, res) => {
+    try {
+      const data = await Grades.create(req.body);
+      res.json(data);
+    } catch (error) {
+      res.status(500).json({ error: "An error occurred while posting grades" });
+    }
+  });
+// const addGrade =
+//   ("/add-grade",
+//   async (req, res) => {
+//     try {
+//       const data = await Grades.insertMany(req.body);
+//       res.json(data);
+//     } catch (error) {
+//       res.status(500).json({ error: "An error occurred while posting grades" });
+//     }
+//   });
 
 const deleteTeacher =
   ("/remove-teacher",
   async (req, res) => {
     try {
       const deletedTeacher = await Teachers.findByIdAndDelete(req.params.id);
-      if (!deletedTeachers) {
+      if (!deletedTeacher) {
         return res
           .status(404)
           .json({ error: `Teacher with ID ${deletedTeacher} not found` });
@@ -100,11 +134,11 @@ const updatePassword = async (req, res) => {
 
 const sendMessage = async (req, res) => {
   try {
-    const { senderId, recipientId, content, senderName } = req.body;
+    const { senderEmail, senderId, recipientEmail, content } = req.body;
     const message = new Message({
-      sender: senderId,
-      senderName: senderName,
-      recipient: recipientId,
+      senderId,
+      senderEmail,
+      recipientEmail,
       content,
     });
     await message.save();
@@ -120,8 +154,8 @@ const sendMessage = async (req, res) => {
 
 const getMessage = async (req, res) => {
   try {
-    const recipientId = req.params.id;
-    const messages = await Message.find({ recipient: recipientId });
+    const recipientEmail = req.params.email;
+    const messages = await Message.find({ recipientEmail: recipientEmail });
     res.status(200).json({ messages: messages });
   } catch (error) {
     res
@@ -154,13 +188,21 @@ const getAllTeachers =
   });
 
 const passwordControl = (req, res) => {
-  res.status(200).json({
+  const responseObject = {
     status: true,
     message: "success",
     role: req.role,
     id: req.id,
     name: req.name,
-  });
+    email: req.email
+  };
+
+  // If the user is a teacher, include the subject in the response
+  if (req.role === "teacher") {
+    responseObject.subject = req.subject;
+  }
+
+  res.status(200).json(responseObject);
 };
 
 const deleteStudent =
@@ -199,9 +241,7 @@ const getClassList = async (req, res) => {
 const getStudentsByClass = async (req, res) => {
   try {
     const classId = req.query.classId;
-    console.log(typeof classId, classId);
     const students = await Students.find({ classId: classId });
-    console.log("🚀 ~ getStudentsByClass ~ students:", students);
     res.json(students);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -259,7 +299,6 @@ module.exports = {
   sendTeacher,
   sendStudent,
   updatePassword,
-  // getStudent,
   getStudentGrade,
   sendMessage,
   getMessage,
@@ -273,4 +312,6 @@ module.exports = {
   getPersonelInfoById,
   getStudentsByClass,
   schoolInformation,
+  addGrade,
+  getGrades,
 };

@@ -28,8 +28,12 @@ const Login = () => {
         setName(res.name);
         localStorage.setItem(
           "userInfo",
-          JSON.stringify({ name: res.name, role: res.role, userId: res.id })
+          JSON.stringify({ name: res.name, role: res.role, userId: res.id, email:res.email})
         );
+
+        if (res.role == "teacher") {
+          localStorage.setItem("subject", res.subject);
+        }
         switch (res.role) {
           case "director":
             navigate("/director-page");

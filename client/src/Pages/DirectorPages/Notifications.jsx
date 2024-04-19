@@ -7,17 +7,25 @@ const NotificationsTable = () => {
   const [notifications, setNotifications] = useState([]);
   const [open, setOpen] = useState(false);
   const [selectedNotification, setSelectedNotification] = useState(null);
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  const userId = userInfo ? userInfo.userId : null;
 
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const userEmail = userInfo ? userInfo.email : null;
   const columns = [
     { field: "senderName", headerName: "Sender name", width: 130 },
+    {
+      field: "senderEmail",
+      headerName: "Sender Email",
+      width: 200,
+      color: "red",
+      valueGetter: (value, row) => `${row.senderEmail || ""}`,
+    },
+
     {
       field: "content",
       headerName: "Content",
       description: "This column has a value getter and is not sortable.",
       sortable: false,
-      width: 200,
+      width: 400,
       valueGetter: (value, row) => `${row.content || ""}`,
     },
   ];
@@ -35,20 +43,22 @@ const NotificationsTable = () => {
     const fetchNotifications = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/getMessage/${userId}`
-        );
+          `http://localhost:3000/getMessage/${userEmail}`
+        )
+          .then((data) => data.json())
+          .then((data) => {
+            setNotifications(data.messages);
+          });
         if (!response.ok) {
           throw new Error(`Error fetching notifications: ${response.status}`);
         }
-        const data = await response.json();
-        setNotifications(data.messages);
       } catch (error) {
         console.error("Error fetching notifications:", error);
       }
     };
 
     fetchNotifications();
-  }, [userId]);
+  }, [userEmail]);
 
   return (
     <div>
@@ -60,6 +70,7 @@ const NotificationsTable = () => {
           getRowId={(row) => row._id}
           onRowClick={(row) => handleOpenModal(row)}
           columns={columns}
+          style={{ color: "red" }}
           initialState={{
             pagination: {
               paginationModel: { page: 0, pageSize: 5 },
@@ -91,10 +102,10 @@ const NotificationsTable = () => {
           <Typography id="modal-title" variant="h6" component="h2">
             Message Content
           </Typography>
-          <Typography id="modal-description" sx={{ mt: 2 }}>
+          <Typography id="modal-description" className="content-highlight">
             {selectedNotification && selectedNotification.row.content}
           </Typography>
-          {/* You can add additional details from the selectedNotification object */}
+          {/* You can add additional details from the selectedNotification object*/}
           <Button onClick={handleCloseModal} variant="contained">
             Close
           </Button>

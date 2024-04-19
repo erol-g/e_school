@@ -17,15 +17,21 @@ const TeachersPage = () => {
     <div className="page-container">
       <PageHeader title="Teacher Page" />
       <button onClick={() => navigate("/class-list")}>to see class list</button>
+      <button>to grade</button>
       <button onClick={() => navigate("/change-password")}>
         to change password
       </button>
-      <button>to grade</button>
+      <button onClick={() => navigate("/grade")}>to grade</button>
       <button>to send a message</button>
       <button onClick={() => navigate("/notifications")}>
         to read your message
       </button>
       <button onClick={() => navigate("/profile")}>to see your personal information</button>
+      <button onClick={() => navigate("/send-message")} >to send a message</button>
+      <button onClick={() => navigate("/notifications")}>
+        to read your message
+      </button>
+      <button>to see your personal information</button>
     </div>
   );
 };
