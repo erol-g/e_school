@@ -17,6 +17,7 @@ import ClasssListByTeacher from "./Pages/ClassListByTeacher";
 import Profile from "./Pages/Profile";
 import Grade from "./Pages/Grade";
 import GeneralInformation from "./Pages/GeneralInformation";
+import SeeGrades from "./Pages/SeeGrades"
 import SendMessage from "./Pages/SendMessage";
 
 
@@ -48,15 +49,16 @@ function App() {
           path="/register-teacher"
           element={<RegisterTeacherPage />}
         ></Route>
-        <Route path="/profile" element={<Profile/>}/>
-         <Route
+        <Route
           path="/school-information"
           element={<GeneralInformation />}
         ></Route>
-         <Route
+        <Route path="/see-grades" element={<SeeGrades />}></Route>
+ <Route
           path="/send-message"
           element={<SendMessage />}
         ></Route>
+        <Route path="/profile" element={<Profile/>}/>
       </Routes>
     </>
   );
