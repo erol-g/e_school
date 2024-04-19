@@ -12,12 +12,6 @@ const StudentsPage = () => {
       <button onClick={() => navigate("/change-password")}>
         to change your password
       </button>
-      <button>to see your notes</button>
-      <button>to send a message</button>
-      <button onClick={() => navigate("/notifications")}>
-        to read your message
-      </button>
-
       <button onClick={() => navigate("/send-message")}>
         to send a message
       </button>

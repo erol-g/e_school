@@ -8,23 +8,23 @@ const RegisterClass = () => {
 
     try {
       const response = await fetch("http://localhost:3000/all-classes");
-      const data = await response.json();
-      const classNames = data.map((item) => item.className);
+      await response.json();
+      // const classNames = data.map((item) => item.className);
 
-      if (classNames.includes(className)) {
-        toast.error("Class already exists");
-      } else {
+      // if (classNames.includes(className)) {
+      //   toast.error("Class already exists");
+      // } else {
         await fetch("http://localhost:3000/register-class", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            className: className,
+            className: className.toUpperCase(),
           }),
         });
         toast.success("Class created successfully");
-      }
+      // }
     } catch (error) {
       toast.error("Failed to create class");
     }

@@ -11,7 +11,6 @@ const NotificationsTable = () => {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   const userEmail = userInfo ? userInfo.email : null;
   const columns = [
-    { field: "senderName", headerName: "Sender name", width: 130 },
     {
       field: "senderEmail",
       headerName: "Sender Email",

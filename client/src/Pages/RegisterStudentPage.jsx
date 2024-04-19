@@ -22,7 +22,8 @@ const RegisterStudentPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/register-student", {
+   try { 
+    const response = await fetch("http://localhost:3000/register-student", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,15 +35,20 @@ const RegisterStudentPage = () => {
         classId: className,
       }),
     })
-      .then((res) => res.json())
-      .then(() => {
+     if (response.ok) {
+        await response.json();
         toast.success("Student registered successfully!"); 
         setEmail("");
         setPassword("");
         setName("");
         setClassName("");
-      })
-      .catch((error) => console.error("Error registering student:", error));
+      } else {
+        throw new Error("Failed to register student");
+      }
+    } catch (error) {
+      console.error("Error registering student:", error);
+      toast.error("Error registering student.");
+    }
   };
 
   return (

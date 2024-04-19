@@ -7,7 +7,18 @@ const RegisterTeacherPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [selectedClasses, setSelectedClasses] = useState([]);
-  const [classList, setClassList] = useState([]); 
+  const [classList, setClassList] = useState([]);
+  const [subject, setSubject] = useState("");
+
+  const subjects = [
+    "Maths",
+    "History",
+    "English",
+    "Geography",
+    "Physics",
+    "PE",
+    "Music",
+  ];
 
   useEffect(() => {
     fetch("http://localhost:3000/all-classes")
@@ -16,51 +27,68 @@ const RegisterTeacherPage = () => {
         setClassList(data);
       })
       .catch((error) => console.error("Error fetching classes:", error));
-  }, []); 
+  }, []);
 
   const handleCheckboxChange = (e) => {
     const classId = e.target.value;
     if (e.target.checked) {
-      setSelectedClasses(prevSelectedClasses => [...prevSelectedClasses, classId]);
+      setSelectedClasses((prevSelectedClasses) => [
+        ...prevSelectedClasses,
+        classId,
+      ]);
     } else {
-      setSelectedClasses(prevSelectedClasses => prevSelectedClasses.filter(id => id !== classId));
+      setSelectedClasses((prevSelectedClasses) =>
+        prevSelectedClasses.filter((id) => id !== classId)
+      );
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/register-teacher", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-        name: name,
-        classIds: selectedClasses,
-      }),
-    })
-      .then((res) => res.json())
-      .then(() => {
-        toast.success("teacher registered successfully!"); 
+    try {
+      const response = await fetch("http://localhost:3000/register-teacher", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+          classIds: selectedClasses,
+          subject,
+        }),
+      });
+      if (response.ok) {
+        await response.json();
+        toast.success("Teacher registered successfully!");
         setEmail("");
         setPassword("");
         setName("");
         setSelectedClasses([]);
-      })
-      .catch((error) => console.error("Error registering teacher:", error));
+        setSubject("");
+      } else {
+        throw new Error("Failed to register teacher");
+      }
+    } catch (error) {
+      console.error("Error registering teacher:", error);
+      toast.error("Error registering teacher.");
+    }
   };
 
   return (
     <div>
       <h2>Teacher Register Page</h2>
       <ToastContainer />
-      <form onSubmit={handleSubmit} style={{display:'flex', flexDirection:'column'}}>
+      <form
+        onSubmit={handleSubmit}
+        style={{ display: "flex", flexDirection: "column" }}
+      >
         <input
           type="text"
           placeholder="name"
+          required
           name="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -69,6 +97,7 @@ const RegisterTeacherPage = () => {
           type="email"
           placeholder="email"
           name="email"
+          required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -76,11 +105,13 @@ const RegisterTeacherPage = () => {
           type="text"
           placeholder="password"
           name="password"
+          required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-       {classList.map((classItem) => (
-          <div key={classItem._id}>Class
+        {classList.map((classItem) => (
+          <div key={classItem._id}>
+            Class
             <input
               type="checkbox"
               id={classItem._id}
@@ -91,6 +122,20 @@ const RegisterTeacherPage = () => {
             <label htmlFor={classItem._id}>{classItem.className}</label>
           </div>
         ))}
+        <label htmlFor="subject"></label>
+        <select
+          id="subject"
+          name="subject"
+          onChange={(e) => setSubject(e.target.value)}
+          required
+        >
+          <option value="">Select a subject</option>
+          {subjects.map((classItem, index) => (
+            <option key={index} value={classItem}>
+              {classItem}
+            </option>
+          ))}
+        </select>
 
         <button type="submit">Send</button>
       </form>
