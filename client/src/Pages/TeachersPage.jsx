@@ -23,6 +23,10 @@ const TeachersPage = () => {
       </button>
       <button onClick={() => navigate("/grade")}>to grade</button>
       <button>to send a message</button>
+      <button onClick={() => navigate("/notifications")}>
+        to read your message
+      </button>
+      <button onClick={() => navigate("/profile")}>to see your personal information</button>
       <button onClick={() => navigate("/send-message")} >to send a message</button>
       <button onClick={() => navigate("/notifications")}>
         to read your message

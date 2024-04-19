@@ -45,6 +45,7 @@ router.post("/addDirector", addDirector);
 router.post("/register-teacher", sendTeacher);
 router.post("/register-student", sendStudent);
 router.post("/create-lesson", createLesson);
+router.get("/getPersonelInfo/:role/:id", getPersonelInfoById);
 router.post("/add-grade", addGrade);
 router.get("/getGrades", getGrades);
 router.get("/getPersonelInfo/:id", getPersonelInfoById);

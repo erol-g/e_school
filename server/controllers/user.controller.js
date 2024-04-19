@@ -13,7 +13,6 @@ const getDirector =
   ("/getDirector",
   async (req, res) => {
     const result = await Director.find({});
-
     res.json(result);
   });
 
@@ -249,14 +248,24 @@ const getStudentsByClass = async (req, res) => {
   }
 };
 
-const getPersonelInfoById =
-  ("/getPersonelInfo/:id",
-  async (req, res) => {
-    const personelId = req.params.id;
-    try {
-      // const findedPersonel = await Teachers.find({})
-    } catch (error) {}
-  });
+const getPersonelInfoById = async (req, res) => {
+  console.log("deneme");
+  const userId = req.params.id;
+  const role = req.params.role;
+  let Model;
+  if (role == "director") Model = Director;
+  if (role == "teacher") Model = Teachers;
+  if (role == "student") Model = Students;
+  console.log(req.params)
+  try {
+    const data = await Model.find({ _id: userId });
+    res.status(200).json({ data: data });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error retrieving messages", error: error.message });
+  }
+};
 
 const schoolInformation =
   ("/school-information",

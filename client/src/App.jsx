@@ -14,6 +14,7 @@ import RegisterClass from "./Pages/RegisterClass";
 import RegisterStudentPage from "./Pages/RegisterStudentPage";
 import RegisterTeacherPage from "./Pages/RegisterTeacherPage";
 import ClasssListByTeacher from "./Pages/ClassListByTeacher";
+import Profile from "./Pages/Profile";
 import Grade from "./Pages/Grade";
 import GeneralInformation from "./Pages/GeneralInformation";
 import SendMessage from "./Pages/SendMessage";
@@ -47,6 +48,7 @@ function App() {
           path="/register-teacher"
           element={<RegisterTeacherPage />}
         ></Route>
+        <Route path="/profile" element={<Profile/>}/>
          <Route
           path="/school-information"
           element={<GeneralInformation />}
