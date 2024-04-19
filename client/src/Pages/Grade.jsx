@@ -104,7 +104,6 @@ const Grade = () => {
 
         // Log result
         console.log(result);
-        console.log("Grade submitted successfully");
       } else {
         // Handle error
         console.error("Error adding grade:", response.statusText);

@@ -26,6 +26,11 @@ const TeachersPage = () => {
       <button onClick={() => navigate("/notifications")}>
         to read your message
       </button>
+      <button onClick={() => navigate("/profile")}>to see your personal information</button>
+      <button onClick={() => navigate("/send-message")} >to send a message</button>
+      <button onClick={() => navigate("/notifications")}>
+        to read your message
+      </button>
       <button>to see your personal information</button>
     </div>
   );

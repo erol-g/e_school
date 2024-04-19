@@ -5,6 +5,7 @@ import Home from "./Pages/Home";
 import DirectorPage from "./Pages/DirectorPage";
 import TeachersPage from "./Pages/TeachersPage";
 import StudentsPage from "./Pages/StudentsPage";
+import StudentsGradeInfo from "./Pages/StudentsGradeInfo";
 import ChangePassword from "./Pages/ChangePassword";
 import Notifications from "./Pages/DirectorPages/Notifications";
 import AllStudents from "./Pages/AllStudents";
@@ -13,9 +14,12 @@ import RegisterClass from "./Pages/RegisterClass";
 import RegisterStudentPage from "./Pages/RegisterStudentPage";
 import RegisterTeacherPage from "./Pages/RegisterTeacherPage";
 import ClasssListByTeacher from "./Pages/ClassListByTeacher";
+import Profile from "./Pages/Profile";
 import Grade from "./Pages/Grade";
 import GeneralInformation from "./Pages/GeneralInformation";
 import SeeGrades from "./Pages/SeeGrades"
+import SendMessage from "./Pages/SendMessage";
+
 
 function App() {
   return (
@@ -38,6 +42,10 @@ function App() {
           element={<RegisterStudentPage />}
         ></Route>
         <Route
+          path="/getGrade/:id"
+          element={<StudentsGradeInfo />}
+        ></Route>
+        <Route
           path="/register-teacher"
           element={<RegisterTeacherPage />}
         ></Route>
@@ -46,6 +54,11 @@ function App() {
           element={<GeneralInformation />}
         ></Route>
         <Route path="/see-grades" element={<SeeGrades />}></Route>
+ <Route
+          path="/send-message"
+          element={<SendMessage />}
+        ></Route>
+        <Route path="/profile" element={<Profile/>}/>
       </Routes>
     </>
   );

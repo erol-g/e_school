@@ -13,7 +13,6 @@ const getDirector =
   ("/getDirector",
   async (req, res) => {
     const result = await Director.find({});
-
     res.json(result);
   });
 
@@ -81,7 +80,7 @@ const deleteTeacher =
   async (req, res) => {
     try {
       const deletedTeacher = await Teachers.findByIdAndDelete(req.params.id);
-      if (!deletedTeachers) {
+      if (!deletedTeacher) {
         return res
           .status(404)
           .json({ error: `Teacher with ID ${deletedTeacher} not found` });
@@ -135,11 +134,11 @@ const updatePassword = async (req, res) => {
 
 const sendMessage = async (req, res) => {
   try {
-    const { senderId, recipientId, content, senderName } = req.body;
+    const { senderEmail, senderId, recipientEmail, content } = req.body;
     const message = new Message({
       senderId,
-      senderName,
-      recipientId,
+      senderEmail,
+      recipientEmail,
       content,
     });
     await message.save();
@@ -155,8 +154,8 @@ const sendMessage = async (req, res) => {
 
 const getMessage = async (req, res) => {
   try {
-    const recipientId = req.params.id;
-    const messages = await Message.find({ recipient: recipientId });
+    const recipientEmail = req.params.email;
+    const messages = await Message.find({ recipientEmail: recipientEmail });
     res.status(200).json({ messages: messages });
   } catch (error) {
     res
@@ -195,6 +194,7 @@ const passwordControl = (req, res) => {
     role: req.role,
     id: req.id,
     name: req.name,
+    email: req.email
   };
 
   // If the user is a teacher, include the subject in the response
@@ -248,14 +248,24 @@ const getStudentsByClass = async (req, res) => {
   }
 };
 
-const getPersonelInfoById =
-  ("/getPersonelInfo/:id",
-  async (req, res) => {
-    const personelId = req.params.id;
-    try {
-      // const findedPersonel = await Teachers.find({})
-    } catch (error) {}
-  });
+const getPersonelInfoById = async (req, res) => {
+  console.log("deneme");
+  const userId = req.params.id;
+  const role = req.params.role;
+  let Model;
+  if (role == "director") Model = Director;
+  if (role == "teacher") Model = Teachers;
+  if (role == "student") Model = Students;
+  console.log(req.params)
+  try {
+    const data = await Model.find({ _id: userId });
+    res.status(200).json({ data: data });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error retrieving messages", error: error.message });
+  }
+};
 
 const schoolInformation =
   ("/school-information",
